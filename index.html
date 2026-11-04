@@ -1,52 +1,833 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OnLuyenHVN</title>
+<meta name="description" content="OnLuyenHVN - Cổng thông tin học tập và ôn luyện kiến thức trực tuyến.">
+<meta name="theme-color" content="#123b70">
+
+<title>OnLuyenHVN - Cổng thông tin học tập</title>
+
 <style>
-* { box-sizing: border-box; }
-body {
+:root {
+  --blue: #123b70;
+  --blue2: #1d5595;
+  --red: #c62828;
+  --gold: #e5b94c;
+  --bg: #f2f5f9;
+  --white: #ffffff;
+  --text: #26364a;
+  --muted: #718096;
+}
+
+* {
   margin: 0;
-  background: #0f172a;
-  color: white;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   font-family: Arial, sans-serif;
-  text-align: center;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
-header {
-  padding: 70px 15px;
-  background: linear-gradient(135deg,#2563eb,#9333ea);
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
-h1 { font-size: 38px; }
-main { padding: 35px 15px; }
-.card {
-  background: #1e293b;
-  padding: 25px;
-  margin: 15px auto;
-  max-width: 450px;
-  border-radius: 15px;
+
+/* TOP BAR */
+.topbar {
+  background: #102e53;
+  color: white;
+  padding: 8px 5%;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
-button {
-  background: #38bdf8;
+
+/* HEADER */
+.header {
+  background: white;
+  padding: 20px 5%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 3px solid var(--red);
+}
+
+.logo {
+  width: 65px;
+  height: 65px;
+  border-radius: 12px;
+  background: var(--blue);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.brand h1 {
+  font-size: 25px;
+  color: var(--blue);
+}
+
+.brand p {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* NAVIGATION */
+.nav {
+  background: var(--blue);
+  color: white;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  display: block;
+  padding: 15px 17px;
+  font-size: 14px;
+  transition: .25s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: var(--blue2);
+  border-bottom: 3px solid var(--gold);
+}
+
+.menu-btn {
+  display: none;
+  background: transparent;
   border: 0;
-  padding: 13px 25px;
-  border-radius: 10px;
+  color: white;
+  font-size: 25px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  background:
+    linear-gradient(110deg, rgba(10,42,83,.96),
+    rgba(29,85,149,.88));
+  color: white;
+  padding: 65px 7%;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "EDUCATION";
+  position: absolute;
+  right: -20px;
+  bottom: -35px;
+  font-size: clamp(60px, 12vw, 150px);
+  font-weight: bold;
+  color: rgba(255,255,255,.045);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 720px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-label {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,.4);
+  padding: 5px 13px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-bottom: 17px;
+}
+
+.hero h2 {
+  font-size: clamp(28px, 5vw, 43px);
+  line-height: 1.25;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  color: #dce9f7;
+  margin-bottom: 25px;
+  max-width: 600px;
+}
+
+.hero-btn {
+  display: inline-block;
+  background: var(--gold);
+  color: #172c46;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: .3s;
+}
+
+.hero-btn:hover {
+  transform: translateY(-3px);
+  background: #f5d477;
+}
+
+/* SEARCH */
+.search-area {
+  max-width: 1000px;
+  margin: -25px auto 35px;
+  padding: 0 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.search-box {
+  background: white;
+  padding: 12px;
+  display: flex;
+  border-radius: 8px;
+  box-shadow: 0 5px 25px #102e5315;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.search-box button {
+  border: 0;
+  background: var(--blue);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* MAIN */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section {
+  margin: 38px 0;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid #dce3ec;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.section-heading h2 {
+  color: var(--blue);
+  font-size: 21px;
+  border-left: 4px solid var(--red);
+  padding-left: 12px;
+}
+
+.view-all {
+  color: var(--blue2);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* QUICK ACCESS */
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.quick-card {
+  background: white;
+  padding: 23px 12px;
+  text-align: center;
+  border-radius: 7px;
+  border: 1px solid #e5eaf0;
+  transition: .3s;
+}
+
+.quick-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px #123b7015;
+  border-color: var(--blue2);
+}
+
+.quick-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.quick-card h3 {
+  color: var(--blue);
+  font-size: 15px;
+}
+
+.quick-card p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+/* CONTENT GRID */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 22px;
+}
+
+.panel {
+  background: white;
+  padding: 22px;
+  border: 1px solid #e5eaf0;
+  border-radius: 7px;
+}
+
+.notice {
+  padding: 14px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.notice:last-child {
+  border-bottom: 0;
+}
+
+.notice small {
+  color: var(--red);
+  font-weight: bold;
+}
+
+.notice h3 {
+  font-size: 14px;
+  color: var(--blue);
+  margin: 4px 0;
+}
+
+.notice p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* COURSES */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.course {
+  background: white;
+  border: 1px solid #e5eaf0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: .3s;
+}
+
+.course:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px #123b7015;
+}
+
+.course-top {
+  padding: 25px;
+  background: linear-gradient(135deg,#123b70,#3679bd);
+  color: white;
+  font-size: 35px;
+}
+
+.course-body {
+  padding: 18px;
+}
+
+.course-body h3 {
+  color: var(--blue);
+  font-size: 16px;
+}
+
+.course-body p {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 8px 0 15px;
+}
+
+.course-body a {
+  display: inline-block;
+  color: var(--blue2);
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* FOOTER */
+.footer {
+  background: #102e53;
+  color: white;
+  margin-top: 55px;
+  padding: 40px 5% 18px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 30px;
+}
+
+.footer h3 {
+  color: var(--gold);
+  margin-bottom: 13px;
+}
+
+.footer p, .footer a {
+  font-size: 13px;
+  color: #d0dceb;
+}
+
+.footer a {
+  display: block;
+  margin: 7px 0;
+}
+
+.copyright {
+  border-top: 1px solid #ffffff25;
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 17px;
+  font-size: 12px;
+  color: #bdcce0;
+}
+
+/* ANIMATION */
+.fade-in {
+  animation: fadeIn .8s ease both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MOBILE */
+@media(max-width: 768px) {
+  .header {
+    padding: 15px 5%;
+  }
+
+  .logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .brand h1 {
+    font-size: 19px;
+  }
+
+  .brand p {
+    font-size: 10px;
+  }
+
+  .menu-btn {
+    display: block;
+    margin-left: auto;
+  }
+
+  .nav {
+    padding: 0 5%;
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links a {
+    border-bottom: 1px solid #ffffff20;
+  }
+
+  .hero {
+    padding: 48px 6%;
+  }
+
+  .quick-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading h2 {
+    font-size: 17px;
+  }
+}
+
+@media(min-width: 769px) and (max-width: 1000px) {
+  .quick-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .course-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>
 </head>
+
 <body>
-<header>
-  <h1>OnLuyenHVN</h1>
-  <p>Học tập và ôn luyện mỗi ngày!</p>
-</header>
-<main>
-  <div class="card">
-    <h2>Chào mừng bạn!</h2>
-    <p>Website ôn luyện kiến thức trực tuyến.</p>
-    <button onclick="alert('Chào mừng đến với OnLuyenHVN!')">
-      Bắt đầu
-    </button>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>CỔNG THÔNG TIN HỌC TẬP ĐIỆN TỬ</span>
+  <span id="clock">Đang tải thời gian...</span>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">OL</div>
+  <div class="brand">
+    <h1>ONLUYENHVN</h1>
+    <p>CỔNG THÔNG TIN HỌC TẬP VÀ ÔN LUYỆN</p>
   </div>
+  <button class="menu-btn" id="menuBtn" aria-label="Mở menu">☰</button>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <div class="nav-links" id="navLinks">
+    <a href="#" class="active">⌂ Trang chủ</a>
+    <a href="#gioithieu">Giới thiệu</a>
+    <a href="#chucnang">Chức năng</a>
+    <a href="#thongbao">Thông báo</a>
+    <a href="#tailieu">Tài liệu</a>
+    <a href="#lienhe">Liên hệ</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content fade-in">
+    <span class="hero-label">NỀN TẢNG HỌC TẬP TRỰC TUYẾN</span>
+    <h2>Học tập hôm nay<br>Kiến thức ngày mai</h2>
+    <p>
+      OnLuyenHVN cung cấp không gian ôn luyện,
+      tra cứu kiến thức và hỗ trợ học tập trực tuyến.
+    </p>
+    <a href="#chucnang" class="hero-btn">
+      KHÁM PHÁ NGAY →
+    </a>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-area">
+  <form class="search-box" id="searchForm">
+    <input id="searchInput"
+      type="search"
+      placeholder="Tìm kiếm môn học, tài liệu...">
+    <button type="submit">Tìm kiếm</button>
+  </form>
+</div>
+
+<main class="container">
+
+<!-- QUICK ACCESS -->
+<section class="section" id="chucnang">
+  <div class="section-heading">
+    <h2>TRUY CẬP NHANH</h2>
+    <span class="view-all">ONLUYENHVN</span>
+  </div>
+
+  <div class="quick-grid">
+    <a href="#tailieu" class="quick-card">
+      <div class="quick-icon">📚</div>
+      <h3>Kho tài liệu</h3>
+      <p>Tài liệu học tập</p>
+    </a>
+
+    <a href="#monhoc" class="quick-card">
+      <div class="quick-icon">📝</div>
+      <h3>Ôn luyện</h3>
+      <p>Luyện tập kiến thức</p>
+    </a>
+
+    <a href="#thongbao" class="quick-card">
+      <div class="quick-icon">📢</div>
+      <h3>Thông báo</h3>
+      <p>Tin tức mới nhất</p>
+    </a>
+
+    <a href="#lienhe" class="quick-card">
+      <div class="quick-icon">✉️</div>
+      <h3>Liên hệ</h3>
+      <p>Hỗ trợ người dùng</p>
+    </a>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="section" id="thongbao">
+  <div class="section-heading">
+    <h2>THÔNG BÁO MỚI</h2>
+    <a href="#thongbao" class="view-all">Xem tất cả →</a>
+  </div>
+
+  <div class="content-grid">
+    <div class="panel">
+      <div class="notice">
+        <small>THÔNG TIN</small>
+        <h3>Chào mừng bạn đến với OnLuyenHVN</h3>
+        <p>Nền tảng học tập và ôn luyện kiến thức trực tuyến.</p>
+      </div>
+
+      <div class="notice">
+        <small>CẬP NHẬT</small>
+        <h3>Website đang được phát triển</h3>
+        <p>Các chức năng mới sẽ được cập nhật trong thời gian tới.</p>
+      </div>
+
+      <div class="notice">
+        <small>HƯỚNG DẪN</small>
+        <h3>Khám phá các chuyên mục học tập</h3>
+        <p>Lựa chọn môn học phù hợp để bắt đầu ôn luyện.</p>
+      </div>
+    </div>
+
+    <div class="panel" id="gioithieu">
+      <div class="section-heading">
+        <h2>GIỚI THIỆU</h2>
+      </div>
+      <p>
+        OnLuyenHVN là dự án website học tập độc lập,
+        hướng đến việc xây dựng môi trường ôn luyện
+        trực tuyến thuận tiện, dễ sử dụng và thân thiện.
+      </p>
+      <br>
+      <p>
+        Website không phải cổng thông tin chính thức
+        của Chính phủ hoặc cơ quan nhà nước.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="section" id="monhoc">
+  <div class="section-heading">
+    <h2>CHUYÊN MỤC HỌC TẬP</h2>
+    <a href="#monhoc" class="view-all">Khám phá →</a>
+  </div>
+
+  <div class="course-grid" id="courseGrid">
+
+    <article class="course" data-search="toán học toán">
+      <div class="course-top">📐</div>
+      <div class="course-body">
+        <h3>Toán học</h3>
+        <p>Kiến thức, công thức và bài tập toán học.</p>
+        <a href="#lienhe">Đang phát triển →</a>
+      </div>
+    </article>
+
+    <article class="course" data-search="ngữ văn văn học">
+      <div class="course-top">📖</div>
+      <div class="course-body">
+        <h3>Ngữ văn</h3>
+        <p>Ôn tập văn học và kiến thức tiếng Việt.</p>
+        <a href="#lienhe">Đang phát triển →</a>
+      </div>
+    </article>
+
+    <article class="course" data-search="tiếng anh english">
+      <div class="course-top">🌐</div>
+      <div class="course-body">
+        <h3>Tiếng Anh</h3>
+        <p>Từ vựng, ngữ pháp và bài tập tiếng Anh.</p>
+        <a href="#lienhe">Đang phát triển →</a>
+      </div>
+    </article>
+
+    <article class="course" data-search="vật lý lý">
+      <div class="course-top">⚡</div>
+      <div class="course-body">
+        <h3>Vật lý</h3>
+        <p>Công thức và kiến thức vật lý.</p>
+        <a href="#lienhe">Đang phát triển →</a>
+      </div>
+    </article>
+
+    <article class="course" data-search="hóa học hóa">
+      <div class="course-top">🧪</div>
+      <div class="course-body">
+        <h3>Hóa học</h3>
+        <p>Phản ứng, phương trình và bài tập hóa học.</p>
+        <a href="#lienhe">Đang phát triển →</a>
+      </div>
+    </article>
+
+    <article class="course" data-search="lịch sử địa lý">
+      <div class="course-top">🌏</div>
+      <div class="course-body">
+        <h3>Lịch sử - Địa lý</h3>
+        <p>Khám phá lịch sử và kiến thức địa lý.</p>
+        <a href="#lienhe">Đang phát triển →</a>
+      </div>
+    </article>
+
+  </div>
+  <p id="noResults" hidden style="text-align:center;padding:20px">
+    Không tìm thấy chuyên mục phù hợp.
+  </p>
+</section>
+
+<!-- DOCUMENTS -->
+<section class="section" id="tailieu">
+  <div class="section-heading">
+    <h2>KHO TÀI LIỆU</h2>
+  </div>
+
+  <div class="panel">
+    <p>📂 Tài liệu ôn tập: Đang cập nhật.</p>
+    <p>📂 Đề luyện tập: Đang cập nhật.</p>
+    <p>📂 Kiến thức tổng hợp: Đang cập nhật.</p>
+  </div>
+</section>
+
 </main>
+
+<!-- FOOTER -->
+<footer class="footer" id="lienhe">
+  <div class="footer-grid">
+    <div>
+      <h3>ONLUYENHVN</h3>
+      <p>
+        Cổng thông tin học tập và ôn luyện trực tuyến.
+        Dự án độc lập phục vụ mục đích học tập.
+      </p>
+    </div>
+
+    <div>
+      <h3>LIÊN KẾT</h3>
+      <a href="#">Trang chủ</a>
+      <a href="#gioithieu">Giới thiệu</a>
+      <a href="#tailieu">Tài liệu</a>
+    </div>
+
+    <div>
+      <h3>THÔNG TIN</h3>
+      <a href="#thongbao">Thông báo</a>
+      <a href="#lienhe">Liên hệ</a>
+      <a href="https://github.com/vanduc123-ad/OnLuyenHVN">
+        GitHub dự án
+      </a>
+    </div>
+  </div>
+
+  <div class="copyright">
+    © 2026 OnLuyenHVN. Website học tập độc lập.
+    Không thuộc cơ quan nhà nước.
+  </div>
+</footer>
+
+<script>
+// MOBILE MENU
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+  navLinks.classList.toggle("show");
+});
+
+// CLOSE MENU AFTER CLICK
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("show");
+  });
+});
+
+// CLOCK
+function updateClock() {
+  const now = new Date();
+  document.getElementById("clock").textContent =
+    now.toLocaleDateString("vi-VN") + " | " +
+    now.toLocaleTimeString("vi-VN");
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// SEARCH COURSES
+document.getElementById("searchForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const query = document.getElementById("searchInput")
+    .value.trim().toLowerCase();
+
+  const courses = document.querySelectorAll(".course");
+  let count = 0;
+
+  courses.forEach(course => {
+    const text = course.innerText.toLowerCase() + " " +
+      course.dataset.search;
+
+    const match = text.includes(query);
+    course.style.display = match ? "" : "none";
+
+    if (match) count++;
+  });
+
+  document.getElementById("noResults").hidden = count !== 0;
+
+  document.getElementById("monhoc").scrollIntoView({
+    behavior: "smooth"
+  });
+});
+</script>
+
 </body>
 </html>
