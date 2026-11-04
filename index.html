@@ -3,618 +3,467 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="OnLuyenHVN - Cổng thông tin học tập và ôn luyện kiến thức trực tuyến.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="OnLuyenHVN - Học Toán 12 Kết nối tri thức, lý thuyết, công thức, ví dụ và bài tập.">
 <meta name="theme-color" content="#123b70">
-
-<title>OnLuyenHVN - Cổng thông tin học tập</title>
+<title>Toán 12 | OnLuyenHVN</title>
 
 <style>
-:root {
-  --blue: #123b70;
-  --blue2: #1d5595;
-  --red: #c62828;
-  --gold: #e5b94c;
-  --bg: #f2f5f9;
-  --white: #ffffff;
-  --text: #26364a;
-  --muted: #718096;
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --blue:#123b70;
+ --primary:#1d5595;
+ --bg:#f3f6fa;
+ --text:#26364a;
+ --muted:#728096;
+ --border:#e2e8f0;
+ --green:#16835b;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body{
+ font-family:Arial,sans-serif;
+ background:var(--bg);
+ color:var(--text);
+ line-height:1.65;
 }
-
-html {
-  scroll-behavior: smooth;
+button,input{font:inherit}
+button{cursor:pointer}
+header{
+ background:white;
+ border-bottom:3px solid #bd3434;
+ padding:17px 5%;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
 }
-
-body {
-  font-family: Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+.brand{display:flex;align-items:center;gap:12px}
+.logo{
+ width:48px;height:48px;
+ background:var(--blue);
+ color:white;
+ border-radius:9px;
+ display:grid;place-items:center;
+ font-weight:bold;font-size:20px;
 }
-
-a {
-  text-decoration: none;
-  color: inherit;
+.brand h1{color:var(--blue);font-size:21px}
+.brand p{font-size:11px;color:var(--muted)}
+.header-link{color:var(--blue);font-size:13px}
+.hero{
+ background:linear-gradient(120deg,#102e53,#2463a6);
+ color:white;padding:35px 6%;
 }
-
-/* TOP BAR */
-.topbar {
-  background: #102e53;
-  color: white;
-  padding: 8px 5%;
-  font-size: 12px;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
+.hero small{color:#c7dcf5}
+.hero h2{font-size:30px;margin:8px 0}
+.hero p{color:#e0ebf7}
+.container{max-width:1250px;margin:25px auto;padding:0 15px}
+.search{
+ width:100%;padding:14px 16px;
+ border:1px solid var(--border);
+ border-radius:8px;background:white;
+ outline-color:var(--primary);
+ margin-bottom:20px;
 }
-
-/* HEADER */
-.header {
-  background: white;
-  padding: 20px 5%;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border-bottom: 3px solid var(--red);
+.layout{
+ display:grid;
+ grid-template-columns:260px minmax(0,1fr) 230px;
+ gap:18px;align-items:start;
 }
-
-.logo {
-  width: 65px;
-  height: 65px;
-  border-radius: 12px;
-  background: var(--blue);
-  color: white;
-  display: grid;
-  place-items: center;
-  font-size: 26px;
-  font-weight: bold;
+.panel{
+ background:white;border:1px solid var(--border);
+ border-radius:9px;padding:17px;
 }
-
-.brand h1 {
-  font-size: 25px;
-  color: var(--blue);
+.panel h3{color:var(--blue);font-size:16px;margin-bottom:12px}
+.chapter{
+ border-top:1px solid var(--border);
+ padding-top:10px;margin-top:10px;
 }
-
-.brand p {
-  font-size: 12px;
-  color: var(--muted);
+.chapter-title{
+ border:0;background:none;width:100%;
+ text-align:left;color:var(--blue);
+ font-weight:bold;padding:6px 0;
 }
-
-/* NAVIGATION */
-.nav {
-  background: var(--blue);
-  color: white;
-  padding: 0 5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.lessons{display:none;padding:5px 0}
+.chapter.open .lessons{display:block}
+.lesson-link{
+ display:block;width:100%;text-align:left;
+ border:0;background:none;
+ padding:8px 10px;border-radius:5px;
+ color:#53657b;font-size:13px;
 }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+.lesson-link:hover,.lesson-link.active{
+ background:#eaf2fc;color:var(--blue);
 }
-
-.nav-links a {
-  display: block;
-  padding: 15px 17px;
-  font-size: 14px;
-  transition: .25s;
+.content{min-width:0}
+.content-box{
+ background:white;border:1px solid var(--border);
+ border-radius:9px;padding:25px;margin-bottom:17px;
 }
-
-.nav-links a:hover,
-.nav-links a.active {
-  background: var(--blue2);
-  border-bottom: 3px solid var(--gold);
+.tag{
+ display:inline-block;background:#eaf2fc;
+ color:var(--blue);padding:4px 9px;
+ border-radius:5px;font-size:11px;font-weight:bold;
 }
-
-.menu-btn {
-  display: none;
-  background: transparent;
-  border: 0;
-  color: white;
-  font-size: 25px;
-  padding: 10px;
-  cursor: pointer;
+.content h2{font-size:25px;color:var(--blue);margin:10px 0}
+.content h3{color:var(--blue);font-size:18px;margin:20px 0 8px}
+.content p{margin:8px 0}
+.content ul{padding-left:22px;margin:8px 0}
+.formula{
+ background:#f0f5fb;border-left:4px solid var(--primary);
+ padding:13px 16px;margin:12px 0;
+ border-radius:4px;font-size:16px;
 }
-
-/* HERO */
-.hero {
-  background:
-    linear-gradient(110deg, rgba(10,42,83,.96),
-    rgba(29,85,149,.88));
-  color: white;
-  padding: 65px 7%;
-  position: relative;
-  overflow: hidden;
+.example{
+ background:#f1faf5;border:1px solid #ccebd9;
+ border-radius:7px;padding:15px;margin:12px 0;
 }
-
-.hero::after {
-  content: "EDUCATION";
-  position: absolute;
-  right: -20px;
-  bottom: -35px;
-  font-size: clamp(60px, 12vw, 150px);
-  font-weight: bold;
-  color: rgba(255,255,255,.045);
-  pointer-events: none;
+.example strong{color:var(--green)}
+.note{
+ background:#fff8e8;border-left:4px solid #e2ac37;
+ padding:12px;margin:12px 0;
 }
-
-.hero-content {
-  max-width: 720px;
-  position: relative;
-  z-index: 1;
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.btn{
+ padding:10px 15px;border:0;
+ border-radius:6px;background:var(--blue);
+ color:white;font-size:13px;
 }
-
-.hero-label {
-  display: inline-block;
-  border: 1px solid rgba(255,255,255,.4);
-  padding: 5px 13px;
-  border-radius: 4px;
-  font-size: 12px;
-  margin-bottom: 17px;
+.btn.secondary{background:#eaf2fc;color:var(--blue)}
+.right-card{margin-bottom:15px}
+.right-card p{font-size:13px;color:var(--muted)}
+footer{
+ background:#102e53;color:white;
+ text-align:center;padding:22px;margin-top:35px;
+ font-size:13px;
 }
-
-.hero h2 {
-  font-size: clamp(28px, 5vw, 43px);
-  line-height: 1.25;
-  margin-bottom: 15px;
+@media(max-width:950px){
+ .layout{grid-template-columns:230px minmax(0,1fr)}
+ .rightbar{display:none}
 }
-
-.hero p {
-  color: #dce9f7;
-  margin-bottom: 25px;
-  max-width: 600px;
-}
-
-.hero-btn {
-  display: inline-block;
-  background: var(--gold);
-  color: #172c46;
-  padding: 12px 24px;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: .3s;
-}
-
-.hero-btn:hover {
-  transform: translateY(-3px);
-  background: #f5d477;
-}
-
-/* SEARCH */
-.search-area {
-  max-width: 1000px;
-  margin: -25px auto 35px;
-  padding: 0 18px;
-  position: relative;
-  z-index: 2;
-}
-
-.search-box {
-  background: white;
-  padding: 12px;
-  display: flex;
-  border-radius: 8px;
-  box-shadow: 0 5px 25px #102e5315;
-}
-
-.search-box input {
-  flex: 1;
-  min-width: 0;
-  border: 0;
-  outline: none;
-  padding: 10px;
-  font-size: 14px;
-}
-
-.search-box button {
-  border: 0;
-  background: var(--blue);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* MAIN */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.section {
-  margin: 38px 0;
-}
-
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 2px solid #dce3ec;
-  padding-bottom: 12px;
-  margin-bottom: 20px;
-}
-
-.section-heading h2 {
-  color: var(--blue);
-  font-size: 21px;
-  border-left: 4px solid var(--red);
-  padding-left: 12px;
-}
-
-.view-all {
-  color: var(--blue2);
-  font-size: 13px;
-  font-weight: bold;
-}
-
-/* QUICK ACCESS */
-.quick-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-}
-
-.quick-card {
-  background: white;
-  padding: 23px 12px;
-  text-align: center;
-  border-radius: 7px;
-  border: 1px solid #e5eaf0;
-  transition: .3s;
-}
-
-.quick-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px #123b7015;
-  border-color: var(--blue2);
-}
-
-.quick-icon {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-
-.quick-card h3 {
-  color: var(--blue);
-  font-size: 15px;
-}
-
-.quick-card p {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 5px;
-}
-
-/* CONTENT GRID */
-.content-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 22px;
-}
-
-.panel {
-  background: white;
-  padding: 22px;
-  border: 1px solid #e5eaf0;
-  border-radius: 7px;
-}
-
-.notice {
-  padding: 14px 0;
-  border-bottom: 1px solid #edf0f4;
-}
-
-.notice:last-child {
-  border-bottom: 0;
-}
-
-.notice small {
-  color: var(--red);
-  font-weight: bold;
-}
-
-.notice h3 {
-  font-size: 14px;
-  color: var(--blue);
-  margin: 4px 0;
-}
-
-.notice p {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-/* COURSES */
-.course-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.course {
-  background: white;
-  border: 1px solid #e5eaf0;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: .3s;
-}
-
-.course:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px #123b7015;
-}
-
-.course-top {
-  padding: 25px;
-  background: linear-gradient(135deg,#123b70,#3679bd);
-  color: white;
-  font-size: 35px;
-}
-
-.course-body {
-  padding: 18px;
-}
-
-.course-body h3 {
-  color: var(--blue);
-  font-size: 16px;
-}
-
-.course-body p {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 8px 0 15px;
-}
-
-.course-body a {
-  display: inline-block;
-  color: var(--blue2);
-  font-weight: bold;
-  font-size: 13px;
-}
-
-/* FOOTER */
-.footer {
-  background: #102e53;
-  color: white;
-  margin-top: 55px;
-  padding: 40px 5% 18px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 30px;
-}
-
-.footer h3 {
-  color: var(--gold);
-  margin-bottom: 13px;
-}
-
-.footer p, .footer a {
-  font-size: 13px;
-  color: #d0dceb;
-}
-
-.footer a {
-  display: block;
-  margin: 7px 0;
-}
-
-.copyright {
-  border-top: 1px solid #ffffff25;
-  text-align: center;
-  margin-top: 30px;
-  padding-top: 17px;
-  font-size: 12px;
-  color: #bdcce0;
-}
-
-/* ANIMATION */
-.fade-in {
-  animation: fadeIn .8s ease both;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* MOBILE */
-@media(max-width: 768px) {
-  .header {
-    padding: 15px 5%;
-  }
-
-  .logo {
-    width: 52px;
-    height: 52px;
-  }
-
-  .brand h1 {
-    font-size: 19px;
-  }
-
-  .brand p {
-    font-size: 10px;
-  }
-
-  .menu-btn {
-    display: block;
-    margin-left: auto;
-  }
-
-  .nav {
-    padding: 0 5%;
-    display: block;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .nav-links a {
-    border-bottom: 1px solid #ffffff20;
-  }
-
-  .hero {
-    padding: 48px 6%;
-  }
-
-  .quick-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .course-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .section-heading h2 {
-    font-size: 17px;
-  }
-}
-
-@media(min-width: 769px) and (max-width: 1000px) {
-  .quick-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .course-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media(max-width:650px){
+ header{padding:13px 15px}
+ .brand h1{font-size:17px}
+ .brand p{font-size:9px}
+ .hero{padding:28px 20px}
+ .hero h2{font-size:25px}
+ .layout{grid-template-columns:1fr}
+ .sidebar{order:0}
+ .content{order:1}
+ .content-box{padding:17px}
+ .content h2{font-size:22px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <span>CỔNG THÔNG TIN HỌC TẬP ĐIỆN TỬ</span>
-  <span id="clock">Đang tải thời gian...</span>
-</div>
-
-<!-- HEADER -->
-<header class="header">
+<header>
+ <div class="brand">
   <div class="logo">OL</div>
-  <div class="brand">
-    <h1>ONLUYENHVN</h1>
-    <p>CỔNG THÔNG TIN HỌC TẬP VÀ ÔN LUYỆN</p>
+  <div>
+   <h1>ONLUYENHVN</h1>
+   <p>HỆ THỐNG HỌC TẬP TRỰC TUYẾN</p>
   </div>
-  <button class="menu-btn" id="menuBtn" aria-label="Mở menu">☰</button>
+ </div>
+ <a class="header-link" href="#home">Trang chủ</a>
 </header>
 
-<!-- NAVIGATION -->
-<nav class="nav">
-  <div class="nav-links" id="navLinks">
-    <a href="#" class="active">⌂ Trang chủ</a>
-    <a href="#gioithieu">Giới thiệu</a>
-    <a href="#chucnang">Chức năng</a>
-    <a href="#thongbao">Thông báo</a>
-    <a href="#tailieu">Tài liệu</a>
-    <a href="#lienhe">Liên hệ</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-content fade-in">
-    <span class="hero-label">NỀN TẢNG HỌC TẬP TRỰC TUYẾN</span>
-    <h2>Học tập hôm nay<br>Kiến thức ngày mai</h2>
-    <p>
-      OnLuyenHVN cung cấp không gian ôn luyện,
-      tra cứu kiến thức và hỗ trợ học tập trực tuyến.
-    </p>
-    <a href="#chucnang" class="hero-btn">
-      KHÁM PHÁ NGAY →
-    </a>
-  </div>
+<section class="hero" id="home">
+ <small>ONLUYENHVN / TOÁN HỌC / LỚP 12</small>
+ <h2>TOÁN HỌC LỚP 12</h2>
+ <p>Bộ sách Kết nối tri thức với cuộc sống</p>
+ <p>Học lý thuyết • Hiểu công thức • Luyện bài tập</p>
 </section>
-
-<!-- SEARCH -->
-<div class="search-area">
-  <form class="search-box" id="searchForm">
-    <input id="searchInput"
-      type="search"
-      placeholder="Tìm kiếm môn học, tài liệu...">
-    <button type="submit">Tìm kiếm</button>
-  </form>
-</div>
 
 <main class="container">
 
-<!-- QUICK ACCESS -->
-<section class="section" id="chucnang">
-  <div class="section-heading">
-    <h2>TRUY CẬP NHANH</h2>
-    <span class="view-all">ONLUYENHVN</span>
+<input class="search" id="search"
+ placeholder="Tìm kiếm bài học, chương hoặc kiến thức..."
+ oninput="searchLessons()">
+
+<div class="layout">
+
+<!-- DANH MỤC -->
+<aside class="panel sidebar">
+ <h3>CHƯƠNG TRÌNH HỌC</h3>
+ <div id="chapterList"></div>
+</aside>
+
+<!-- NỘI DUNG -->
+<section class="content" id="content">
+
+ <article class="content-box">
+  <span class="tag">GIỚI THIỆU MÔN HỌC</span>
+  <h2>Chào mừng đến với Toán 12</h2>
+  <p>
+   Hệ thống tổng hợp kiến thức Toán 12 theo bộ sách
+   Kết nối tri thức với cuộc sống.
+  </p>
+  <h3>Bạn sẽ học được gì?</h3>
+  <ul>
+   <li>Nắm vững lý thuyết của từng bài.</li>
+   <li>Hiểu bản chất các công thức toán học.</li>
+   <li>Biết cách áp dụng vào từng dạng bài tập.</li>
+   <li>Rèn luyện kỹ năng giải toán.</li>
+   <li>Ôn tập kiến thức theo từng chương.</li>
+  </ul>
+  <div class="example">
+   <strong>Bắt đầu học:</strong>
+   <p>Chọn một chương và bài học ở danh mục bên trái.</p>
   </div>
+ </article>
 
-  <div class="quick-grid">
-    <a href="#tailieu" class="quick-card">
-      <div class="quick-icon">📚</div>
-      <h3>Kho tài liệu</h3>
-      <p>Tài liệu học tập</p>
-    </a>
-
-    <a href="#monhoc" class="quick-card">
-      <div class="quick-icon">📝</div>
-      <h3>Ôn luyện</h3>
-      <p>Luyện tập kiến thức</p>
-    </a>
-
-    <a href="#thongbao" class="quick-card">
-      <div class="quick-icon">📢</div>
-      <h3>Thông báo</h3>
-      <p>Tin tức mới nhất</p>
-    </a>
-
-    <a href="#lienhe" class="quick-card">
-      <div class="quick-icon">✉️</div>
-      <h3>Liên hệ</h3>
-      <p>Hỗ trợ người dùng</p>
-    </a>
-  </div>
 </section>
 
-<!-- NEWS -->
-<section class="section" id="thongbao">
-  <div class="section-heading">
-    <h2>THÔNG BÁO MỚI</h2>
+<!-- KIẾN THỨC BÊN PHẢI -->
+<aside class="rightbar">
+ <div class="panel right-card">
+  <h3>PHƯƠNG PHÁP HỌC</h3>
+  <p>1. Đọc lý thuyết.</p>
+  <p>2. Ghi nhớ công thức.</p>
+  <p>3. Xem ví dụ.</p>
+  <p>4. Tự giải bài tập.</p>
+ </div>
+ <div class="panel right-card">
+  <h3>MỤC TIÊU</h3>
+  <p>Hiểu bản chất kiến thức, không chỉ học thuộc công thức.</p>
+ </div>
+</aside>
+
+</div>
+</main>
+
+<footer>
+ ONLUYENHVN © 2026
+ <br>Website học tập độc lập
+</footer>
+
+<script>
+const chapters = [
+{
+ name:"Chương I. Ứng dụng đạo hàm",
+ lessons:[
+ ["Bài 1. Tính đơn điệu và cực trị của hàm số",
+  "Xét tính đồng biến, nghịch biến và xác định điểm cực trị."],
+ ["Bài 2. Giá trị lớn nhất và nhỏ nhất",
+  "Tìm GTLN, GTNN trên khoảng và đoạn."],
+ ["Bài 3. Đường tiệm cận",
+  "Tiệm cận đứng, ngang và xiên."],
+ ["Bài 4. Khảo sát và vẽ đồ thị",
+  "Khảo sát sự biến thiên và dựng đồ thị hàm số."],
+ ["Bài 5. Ứng dụng đạo hàm thực tiễn",
+  "Giải quyết bài toán tối ưu và các vấn đề thực tế."]
+ ]
+},
+{
+ name:"Chương II. Vectơ trong không gian",
+ lessons:[
+ ["Bài 6. Vectơ trong không gian","Các phép toán vectơ và tích vô hướng."],
+ ["Bài 7. Hệ trục tọa độ trong không gian","Tọa độ điểm và vectơ trong không gian."],
+ ["Bài 8. Biểu thức tọa độ của vectơ","Các phép toán vectơ bằng tọa độ."]
+ ]
+},
+{
+ name:"Chương III. Thống kê",
+ lessons:[
+ ["Bài 9. Khoảng biến thiên và khoảng tứ phân vị","Đo độ phân tán của mẫu số liệu ghép nhóm."],
+ ["Bài 10. Phương sai và độ lệch chuẩn","Đánh giá mức độ phân tán của dữ liệu."]
+ ]
+},
+{
+ name:"Chương IV. Nguyên hàm và tích phân",
+ lessons:[
+ ["Bài 11. Nguyên hàm","Khái niệm, tính chất và bảng nguyên hàm."],
+ ["Bài 12. Tích phân","Định nghĩa và tính chất tích phân."],
+ ["Bài 13. Ứng dụng hình học của tích phân","Tính diện tích hình phẳng và thể tích."]
+ ]
+},
+{
+ name:"Chương V. Tọa độ trong không gian",
+ lessons:[
+ ["Bài 14. Phương trình mặt phẳng","Vectơ pháp tuyến và phương trình mặt phẳng."],
+ ["Bài 15. Phương trình đường thẳng","Phương trình tham số và chính tắc."],
+ ["Bài 16. Công thức tính góc","Góc giữa đường thẳng, mặt phẳng và các đối tượng."],
+ ["Bài 17. Phương trình mặt cầu","Tâm, bán kính và phương trình mặt cầu."]
+ ]
+},
+{
+ name:"Chương VI. Xác suất có điều kiện",
+ lessons:[
+ ["Bài 18. Xác suất có điều kiện","Khái niệm và công thức xác suất có điều kiện."],
+ ["Bài 19. Công thức xác suất toàn phần và Bayes","Vận dụng xác suất toàn phần và công thức Bayes."]
+ ]
+}
+];
+
+function renderChapters(){
+ const root=document.getElementById("chapterList");
+ root.innerHTML="";
+
+ chapters.forEach((chapter,ci)=>{
+  const box=document.createElement("div");
+  box.className="chapter"+(ci===0?" open":"");
+
+  const title=document.createElement("button");
+  title.className="chapter-title";
+  title.textContent=(ci+1)+". "+chapter.name;
+  title.onclick=()=>box.classList.toggle("open");
+
+  const list=document.createElement("div");
+  list.className="lessons";
+
+  chapter.lessons.forEach((lesson,li)=>{
+   const btn=document.createElement("button");
+   btn.className="lesson-link";
+   btn.textContent=lesson[0];
+   btn.dataset.search=(lesson[0]+" "+lesson[1]+" "+chapter.name).toLowerCase();
+   btn.onclick=()=>{
+    document.querySelectorAll(".lesson-link").forEach(x=>x.classList.remove("active"));
+    btn.classList.add("active");
+    showLesson(ci,li);
+   };
+   list.appendChild(btn);
+  });
+
+  box.append(title,list);
+  root.appendChild(box);
+ });
+}
+
+function showLesson(ci,li){
+ const lesson=chapters[ci].lessons[li];
+ const area=document.getElementById("content");
+
+ let detail="Nội dung này sẽ được trình bày theo các phần: khái niệm, lý thuyết, công thức, ví dụ minh họa, bài tập và tổng kết.";
+
+ if(ci===0 && li===0){
+  detail=`
+   <h3>1. Tính đơn điệu của hàm số</h3>
+   <p>
+    Một hàm số được gọi là đồng biến trên một khoảng
+    nếu khi x tăng thì giá trị hàm số cũng tăng.
+   </p>
+   <p>
+    Hàm số nghịch biến nếu khi x tăng thì giá trị hàm số giảm.
+   </p>
+
+   <div class="formula">
+    Nếu f'(x) > 0 trên khoảng K thì f(x) đồng biến trên K.
+   </div>
+   <div class="formula">
+    Nếu f'(x) < 0 trên khoảng K thì f(x) nghịch biến trên K.
+   </div>
+
+   <h3>2. Các bước xét tính đơn điệu</h3>
+   <ul>
+    <li>Tìm tập xác định của hàm số.</li>
+    <li>Tính đạo hàm f'(x).</li>
+    <li>Giải phương trình f'(x) = 0.</li>
+    <li>Lập bảng xét dấu đạo hàm.</li>
+    <li>Kết luận khoảng đồng biến và nghịch biến.</li>
+   </ul>
+
+   <h3>3. Cực trị của hàm số</h3>
+   <p>
+    Điểm cực đại là điểm mà hàm số chuyển từ tăng sang giảm.
+    Điểm cực tiểu là điểm mà hàm số chuyển từ giảm sang tăng.
+   </p>
+
+   <div class="formula">
+    f'(x) đổi dấu từ + sang -: cực đại.
+    <br>
+    f'(x) đổi dấu từ - sang +: cực tiểu.
+   </div>
+
+   <h3>4. Ví dụ minh họa</h3>
+   <div class="example">
+    <strong>Đề bài:</strong>
+    <p>Cho hàm số f(x) = x² - 4x + 3.</p>
+    <p>Tìm khoảng đồng biến, nghịch biến.</p>
+    <strong>Lời giải:</strong>
+    <p>Bước 1: Tập xác định D = R.</p>
+    <p>Bước 2: f'(x) = 2x - 4.</p>
+    <p>Bước 3: f'(x) = 0 khi x = 2.</p>
+    <p>Bước 4:</p>
+    <p>Với x &lt; 2: f'(x) &lt; 0.</p>
+    <p>Với x &gt; 2: f'(x) &gt; 0.</p>
+    <strong>Kết luận:</strong>
+    <p>Nghịch biến trên (-∞; 2), đồng biến trên (2; +∞).</p>
+   </div>
+
+   <h3>5. Kiến thức cần ghi nhớ</h3>
+   <ul>
+    <li>Đạo hàm dương: hàm số đồng biến.</li>
+    <li>Đạo hàm âm: hàm số nghịch biến.</li>
+    <li>Cần xét dấu đạo hàm để xác định cực trị.</li>
+   </ul>
+  `;
+ }
+
+ area.innerHTML=`
+  <article class="content-box">
+   <span class="tag">${chapters[ci].name}</span>
+   <h2>${lesson[0]}</h2>
+   <p>${lesson[1]}</p>
+   <hr style="border:0;border-top:1px solid #e2e8f0;margin:18px 0">
+   <h3>NỘI DUNG BÀI HỌC</h3>
+   ${detail}
+   <div class="actions">
+    <button class="btn secondary" onclick="previousLesson(${ci},${li})">← Bài trước</button>
+    <button class="btn" onclick="nextLesson(${ci},${li})">Bài tiếp theo →</button>
+   </div>
+  </article>
+ `;
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function nextLesson(ci,li){
+ if(li+1<chapters[ci].lessons.length){
+  showLesson(ci,li+1);
+  activate(ci,li+1);
+ }else if(ci+1<chapters.length){
+  showLesson(ci+1,0);
+  activate(ci+1,0);
+ }
+}
+
+function previousLesson(ci,li){
+ if(li>0){
+  showLesson(ci,li-1);
+  activate(ci,li-1);
+ }else if(ci>0){
+  const last=chapters[ci-1].lessons.length-1;
+  showLesson(ci-1,last);
+  activate(ci-1,last);
+ }
+}
+
+function activate(ci,li){
+ document.querySelectorAll(".lesson-link").forEach(x=>x.classList.remove("active"));
+ const target=document.querySelectorAll(".chapter")[ci];
+ target.classList.add("open");
+ target.querySelectorAll(".lesson-link")[li].classList.add("active");
+}
+
+function searchLessons(){
+ const q=document.getElementById("search").value.toLowerCase().trim();
+ document.querySelectorAll(".chapter").forEach((chapter)=>{
+  let found=false;
+  chapter.querySelectorAll(".lesson-link").forEach(btn=>{
+   const match=btn.dataset.search.includes(q);
+   btn.style.display=match?"block":"none";
+   if(match)found=true;
+  });
+  chapter.style.display=found?"block":"none";
+  if(q)chapter.classList.add("open");
+ });
+}
+
+renderChapters();
+</script>
+
+</body>
+</html>
+ BÁO MỚI</h2>
     <a href="#thongbao" class="view-all">Xem tất cả →</a>
   </div>
 
