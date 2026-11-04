@@ -1,375 +1,135 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="OnLuyenHVN - Học Toán 12 Kết nối tri thức, lý thuyết, công thức, ví dụ và bài tập.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="OnLuyenHVN - Cổng thông tin học tập và ôn luyện kiến thức trực tuyến.">
 <meta name="theme-color" content="#123b70">
-<title>Toán 12 | OnLuyenHVN</title>
-
+<title>OnLuyenHVN - Cổng thông tin học tập</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
- --blue:#123b70;
- --primary:#1d5595;
- --bg:#f3f6fa;
- --text:#26364a;
- --muted:#728096;
- --border:#e2e8f0;
- --green:#16835b;
-}
-body{
- font-family:Arial,sans-serif;
- background:var(--bg);
- color:var(--text);
- line-height:1.65;
-}
-button,input{font:inherit}
-button{cursor:pointer}
-header{
- background:white;
- border-bottom:3px solid #bd3434;
- padding:17px 5%;
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:12px;
-}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{
- width:48px;height:48px;
- background:var(--blue);
- color:white;
- border-radius:9px;
- display:grid;place-items:center;
- font-weight:bold;font-size:20px;
-}
-.brand h1{color:var(--blue);font-size:21px}
-.brand p{font-size:11px;color:var(--muted)}
-.header-link{color:var(--blue);font-size:13px}
-.hero{
- background:linear-gradient(120deg,#102e53,#2463a6);
- color:white;padding:35px 6%;
-}
-.hero small{color:#c7dcf5}
-.hero h2{font-size:30px;margin:8px 0}
-.hero p{color:#e0ebf7}
-.container{max-width:1250px;margin:25px auto;padding:0 15px}
-.search{
- width:100%;padding:14px 16px;
- border:1px solid var(--border);
- border-radius:8px;background:white;
- outline-color:var(--primary);
- margin-bottom:20px;
-}
-.layout{
- display:grid;
- grid-template-columns:260px minmax(0,1fr) 230px;
- gap:18px;align-items:start;
-}
-.panel{
- background:white;border:1px solid var(--border);
- border-radius:9px;padding:17px;
-}
-.panel h3{color:var(--blue);font-size:16px;margin-bottom:12px}
-.chapter{
- border-top:1px solid var(--border);
- padding-top:10px;margin-top:10px;
-}
-.chapter-title{
- border:0;background:none;width:100%;
- text-align:left;color:var(--blue);
- font-weight:bold;padding:6px 0;
-}
-.lessons{display:none;padding:5px 0}
-.chapter.open .lessons{display:block}
-.lesson-link{
- display:block;width:100%;text-align:left;
- border:0;background:none;
- padding:8px 10px;border-radius:5px;
- color:#53657b;font-size:13px;
-}
-.lesson-link:hover,.lesson-link.active{
- background:#eaf2fc;color:var(--blue);
-}
-.content{min-width:0}
-.content-box{
- background:white;border:1px solid var(--border);
- border-radius:9px;padding:25px;margin-bottom:17px;
-}
-.tag{
- display:inline-block;background:#eaf2fc;
- color:var(--blue);padding:4px 9px;
- border-radius:5px;font-size:11px;font-weight:bold;
-}
-.content h2{font-size:25px;color:var(--blue);margin:10px 0}
-.content h3{color:var(--blue);font-size:18px;margin:20px 0 8px}
-.content p{margin:8px 0}
-.content ul{padding-left:22px;margin:8px 0}
-.formula{
- background:#f0f5fb;border-left:4px solid var(--primary);
- padding:13px 16px;margin:12px 0;
- border-radius:4px;font-size:16px;
-}
-.example{
- background:#f1faf5;border:1px solid #ccebd9;
- border-radius:7px;padding:15px;margin:12px 0;
-}
-.example strong{color:var(--green)}
-.note{
- background:#fff8e8;border-left:4px solid #e2ac37;
- padding:12px;margin:12px 0;
-}
-.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
-.btn{
- padding:10px 15px;border:0;
- border-radius:6px;background:var(--blue);
- color:white;font-size:13px;
-}
-.btn.secondary{background:#eaf2fc;color:var(--blue)}
-.right-card{margin-bottom:15px}
-.right-card p{font-size:13px;color:var(--muted)}
-footer{
- background:#102e53;color:white;
- text-align:center;padding:22px;margin-top:35px;
- font-size:13px;
-}
-@media(max-width:950px){
- .layout{grid-template-columns:230px minmax(0,1fr)}
- .rightbar{display:none}
-}
-@media(max-width:650px){
- header{padding:13px 15px}
- .brand h1{font-size:17px}
- .brand p{font-size:9px}
- .hero{padding:28px 20px}
- .hero h2{font-size:25px}
- .layout{grid-template-columns:1fr}
- .sidebar{order:0}
- .content{order:1}
- .content-box{padding:17px}
- .content h2{font-size:22px}
-}
+:root{--blue:#123b70;--blue2:#1d5595;--red:#c62828;--gold:#e5b94c;--bg:#f2f5f9;--white:#fff;--text:#26364a;--muted:#718096}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}a{text-decoration:none;color:inherit}
+.topbar{background:#102e53;color:white;padding:8px 5%;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.header{background:white;padding:20px 5%;display:flex;align-items:center;gap:16px;border-bottom:3px solid var(--red)}
+.logo{width:65px;height:65px;border-radius:12px;background:var(--blue);color:white;display:grid;place-items:center;font-size:26px;font-weight:bold}
+.brand h1{font-size:25px;color:var(--blue)}.brand p{font-size:12px;color:var(--muted)}
+.nav{background:var(--blue);color:white;padding:0 5%;display:flex;align-items:center;justify-content:space-between}.nav-links{display:flex;align-items:center;flex-wrap:wrap}
+.nav-links a{display:block;padding:15px 17px;font-size:14px;transition:.25s}.nav-links a:hover,.nav-links a.active{background:var(--blue2);border-bottom:3px solid var(--gold)}
+.menu-btn{display:none;background:transparent;border:0;color:white;font-size:25px;padding:10px;cursor:pointer}
+.hero{background:linear-gradient(110deg,rgba(10,42,83,.96),rgba(29,85,149,.88));color:white;padding:65px 7%;position:relative;overflow:hidden}
+.hero:after{content:"EDUCATION";position:absolute;right:-20px;bottom:-35px;font-size:clamp(60px,12vw,150px);font-weight:bold;color:rgba(255,255,255,.045);pointer-events:none}
+.hero-content{max-width:720px;position:relative;z-index:1}.hero-label{display:inline-block;border:1px solid rgba(255,255,255,.4);padding:5px 13px;border-radius:4px;font-size:12px;margin-bottom:17px}
+.hero h2{font-size:clamp(28px,5vw,43px);line-height:1.25;margin-bottom:15px}.hero p{color:#dce9f7;margin-bottom:25px;max-width:600px}
+.hero-btn{display:inline-block;background:var(--gold);color:#172c46;padding:12px 24px;border-radius:5px;font-weight:bold;transition:.3s}.hero-btn:hover{transform:translateY(-3px);background:#f5d477}
+.search-area{max-width:1000px;margin:-25px auto 35px;padding:0 18px;position:relative;z-index:2}.search-box{background:white;padding:12px;display:flex;border-radius:8px;box-shadow:0 5px 25px #102e5315}
+.search-box input{flex:1;min-width:0;border:0;outline:none;padding:10px;font-size:14px}.search-box button{border:0;background:var(--blue);color:white;padding:10px 20px;border-radius:5px;cursor:pointer}
+.container{width:90%;max-width:1200px;margin:auto}.section{margin:38px 0}.section-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:2px solid #dce3ec;padding-bottom:12px;margin-bottom:20px}
+.section-heading h2{color:var(--blue);font-size:21px;border-left:4px solid var(--red);padding-left:12px}.view-all{color:var(--blue2);font-size:13px;font-weight:bold}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.quick-card{background:white;padding:23px 12px;text-align:center;border-radius:7px;border:1px solid #e5eaf0;transition:.3s}
+.quick-card:hover{transform:translateY(-5px);box-shadow:0 8px 25px #123b7015;border-color:var(--blue2)}.quick-icon{font-size:32px;margin-bottom:10px}
+.quick-card h3{color:var(--blue);font-size:15px}.quick-card p{font-size:12px;color:var(--muted);margin-top:5px}
+.content-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:22px}.panel{background:white;padding:22px;border:1px solid #e5eaf0;border-radius:7px}
+.notice{padding:14px 0;border-bottom:1px solid #edf0f4}.notice:last-child{border-bottom:0}.notice small{color:var(--red);font-weight:bold}
+.notice h3{font-size:14px;color:var(--blue);margin:4px 0}.notice p{color:var(--muted);font-size:12px}
+.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.course{background:white;border:1px solid #e5eaf0;border-radius:8px;overflow:hidden;transition:.3s}
+.course:hover{transform:translateY(-5px);box-shadow:0 8px 25px #123b7015}.course-top{padding:25px;background:linear-gradient(135deg,#123b70,#3679bd);color:white;font-size:35px}
+.course-body{padding:18px}.course-body h3{color:var(--blue);font-size:16px}.course-body p{font-size:13px;color:var(--muted);margin:8px 0 15px}
+.course-body a{display:inline-block;color:var(--blue2);font-weight:bold;font-size:13px}
+.footer{background:#102e53;color:white;margin-top:55px;padding:40px 5% 18px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+.footer h3{color:var(--gold);margin-bottom:13px}.footer p,.footer a{font-size:13px;color:#d0dceb}.footer a{display:block;margin:7px 0}
+.copyright{border-top:1px solid #ffffff25;text-align:center;margin-top:30px;padding-top:17px;font-size:12px;color:#bdcce0}
+.fade-in{animation:fadeIn .8s ease both}@keyframes fadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){.header{padding:15px 5%}.logo{width:52px;height:52px}.brand h1{font-size:19px}.brand p{font-size:10px}
+.menu-btn{display:block;margin-left:auto}.nav{padding:0 5%;display:block}.nav-links{display:none;flex-direction:column;align-items:stretch}.nav-links.show{display:flex}
+.nav-links a{border-bottom:1px solid #ffffff20}.hero{padding:48px 6%}.quick-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.content-grid,.course-grid,.footer-grid{grid-template-columns:1fr}.section-heading h2{font-size:17px}}
+@media(min-width:769px) and (max-width:1000px){.quick-grid{grid-template-columns:repeat(2,1fr)}.course-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* KHU VUC TOAN 12 - chi bo sung, khong doi giao dien trang chu */
+.math12{display:none;margin:35px 0;animation:fadeIn .5s ease}.math12.show{display:block}
+.math-banner{background:linear-gradient(120deg,#123b70,#3679bd);color:white;padding:28px;border-radius:8px;margin-bottom:20px}
+.math-banner h2{font-size:25px;margin:5px 0}.math-banner p{color:#e0ecf8;font-size:14px}
+.math-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.math-layout{display:grid;grid-template-columns:290px 1fr;gap:20px;align-items:start}
+.math-sidebar,.math-content{background:white;border:1px solid #e5eaf0;border-radius:8px;padding:18px;min-width:0}
+.math-sidebar{position:sticky;top:12px;max-height:78vh;overflow:auto}.math-sidebar h3{color:var(--blue);margin-bottom:12px}
+.chapter-button,.lesson-button{display:block;width:100%;text-align:left;border:1px solid #e1e8f0;background:#f4f7fb;padding:10px;margin:6px 0;border-radius:5px;color:var(--text);cursor:pointer;font-size:13px;line-height:1.5}
+.chapter-button.active,.chapter-button:hover,.lesson-button.active,.lesson-button:hover{background:#e7f0fb;border-color:var(--blue2);color:var(--blue)}
+.lesson-list{padding-left:9px}.lesson-button{background:white;border:0;border-bottom:1px solid #edf0f4;border-radius:0}
+.math-content h2{color:var(--blue);font-size:23px;margin-bottom:8px}.math-content h3{color:var(--blue2);font-size:17px;margin:22px 0 10px;border-left:3px solid var(--red);padding-left:10px}
+.math-content p,.math-content li{font-size:14px;line-height:1.8}.math-content ul,.math-content ol{padding-left:22px;margin:8px 0}
+.math-formula{background:#f0f5fb;border-left:4px solid var(--blue2);padding:13px;border-radius:5px;margin:12px 0;font-family:"Times New Roman",serif;font-size:16px;overflow-wrap:anywhere}
+.math-example{background:#fffaf0;border:1px solid #f0dfb8;border-radius:6px;padding:15px;margin:12px 0}
+.math-exercise{background:#f4f8f5;border:1px solid #d8e9dc;border-radius:6px;padding:15px;margin:12px 0}
+.math-answer{display:none;background:#eaf5ed;padding:12px;margin-top:10px;border-radius:5px;color:#245b35;font-size:14px}.math-answer.show{display:block}
+.math-action{border:0;background:var(--blue);color:white;padding:9px 14px;border-radius:5px;cursor:pointer}.math-action:hover{background:var(--blue2)}
+.math-meta{font-size:12px;color:var(--muted);margin:8px 0 15px}.math-note{background:#fff7e6;border:1px solid #f0dfb8;padding:12px;border-radius:5px;margin:14px 0;font-size:13px}
+@media(max-width:768px){.math-layout{grid-template-columns:1fr}.math-sidebar{position:static;max-height:none}.math-banner h2{font-size:21px}}
 </style>
 </head>
-
 <body>
-
-<header>
- <div class="brand">
-  <div class="logo">OL</div>
-  <div>
-   <h1>ONLUYENHVN</h1>
-   <p>HỆ THỐNG HỌC TẬP TRỰC TUYẾN</p>
-  </div>
- </div>
- <a class="header-link" href="#home">Trang chủ</a>
-</header>
-
-<section class="hero" id="home">
- <small>ONLUYENHVN / TOÁN HỌC / LỚP 12</small>
- <h2>TOÁN HỌC LỚP 12</h2>
- <p>Bộ sách Kết nối tri thức với cuộc sống</p>
- <p>Học lý thuyết • Hiểu công thức • Luyện bài tập</p>
-</section>
-
+<div class="topbar"><span>CỔNG THÔNG TIN HỌC TẬP ĐIỆN TỬ</span><span id="clock">Đang tải thời gian...</span></div>
+<header class="header"><div class="logo">OL</div><div class="brand"><h1>ONLUYENHVN</h1><p>CỔNG THÔNG TIN HỌC TẬP VÀ ÔN LUYỆN</p></div><button class="menu-btn" id="menuBtn" aria-label="Mở menu">☰</button></header>
+<nav class="nav"><div class="nav-links" id="navLinks">
+<a href="#" class="active">⌂ Trang chủ</a><a href="#gioithieu">Giới thiệu</a><a href="#chucnang">Chức năng</a><a href="#thongbao">Thông báo</a><a href="#tailieu">Tài liệu</a><a href="#lienhe">Liên hệ</a>
+</div></nav>
+<section class="hero"><div class="hero-content fade-in"><span class="hero-label">NỀN TẢNG HỌC TẬP TRỰC TUYẾN</span><h2>Học tập hôm nay<br>Kiến thức ngày mai</h2><p>OnLuyenHVN cung cấp không gian ôn luyện, tra cứu kiến thức và hỗ trợ học tập trực tuyến.</p><a href="#chucnang" class="hero-btn">KHÁM PHÁ NGAY →</a></div></section>
+<div class="search-area"><form class="search-box" id="searchForm"><input id="searchInput" type="search" placeholder="Tìm kiếm môn học, tài liệu..."><button type="submit">Tìm kiếm</button></form></div>
 <main class="container">
+<section class="section" id="chucnang"><div class="section-heading"><h2>TRUY CẬP NHANH</h2><span class="view-all">ONLUYENHVN</span></div>
+<div class="quick-grid">
+<a href="#tailieu" class="quick-card"><div class="quick-icon">📚</div><h3>Kho tài liệu</h3><p>Tài liệu học tập</p></a>
+<a href="#monhoc" class="quick-card"><div class="quick-icon">📝</div><h3>Ôn luyện</h3><p>Luyện tập kiến thức</p></a>
+<a href="#thongbao" class="quick-card"><div class="quick-icon">📢</div><h3>Thông báo</h3><p>Tin tức mới nhất</p></a>
+<a href="#lienhe" class="quick-card"><div class="quick-icon">✉️</div><h3>Liên hệ</h3><p>Hỗ trợ người dùng</p></a>
+</div></section>
+<section class="section" id="thongbao"><div class="section-heading"><h2>THÔNG BÁO MỚI</h2><a href="#thongbao" class="view-all">Xem tất cả →</a></div>
+<div class="content-grid"><div class="panel">
+<div class="notice"><small>THÔNG TIN</small><h3>Chào mừng bạn đến với OnLuyenHVN</h3><p>Nền tảng học tập và ôn luyện kiến thức trực tuyến.</p></div>
+<div class="notice"><small>CẬP NHẬT</small><h3>Website đang được phát triển</h3><p>Các chức năng mới sẽ được cập nhật trong thời gian tới.</p></div>
+<div class="notice"><small>HƯỚNG DẪN</small><h3>Khám phá các chuyên mục học tập</h3><p>Lựa chọn môn học phù hợp để bắt đầu ôn luyện.</p></div>
+</div><div class="panel" id="gioithieu"><div class="section-heading"><h2>GIỚI THIỆU</h2></div><p>OnLuyenHVN là dự án website học tập độc lập, hướng đến việc xây dựng môi trường ôn luyện trực tuyến thuận tiện, dễ sử dụng và thân thiện.</p><br><p>Website không phải cổng thông tin chính thức của Chính phủ hoặc cơ quan nhà nước.</p></div></div></section>
+<section class="section" id="monhoc"><div class="section-heading"><h2>CHUYÊN MỤC HỌC TẬP</h2><a href="#monhoc" class="view-all">Khám phá →</a></div>
+<div class="course-grid" id="courseGrid">
+<article class="course" data-search="toán học toán toán 12"><div class="course-top">📐</div><div class="course-body"><h3>Toán học</h3><p>Toán 12 – Kết nối tri thức: 6 chương, 19 bài học.</p><a href="#toan12" onclick="openMath12()">Vào học ngay →</a></div></article>
+<article class="course" data-search="ngữ văn văn học"><div class="course-top">📖</div><div class="course-body"><h3>Ngữ văn</h3><p>Ôn tập văn học và kiến thức tiếng Việt.</p><a href="#lienhe">Đang phát triển →</a></div></article>
+<article class="course" data-search="tiếng anh english"><div class="course-top">🌐</div><div class="course-body"><h3>Tiếng Anh</h3><p>Từ vựng, ngữ pháp và bài tập tiếng Anh.</p><a href="#lienhe">Đang phát triển →</a></div></article>
+<article class="course" data-search="vật lý lý"><div class="course-top">⚡</div><div class="course-body"><h3>Vật lý</h3><p>Công thức và kiến thức vật lý.</p><a href="#lienhe">Đang phát triển →</a></div></article>
+<article class="course" data-search="hóa học hóa"><div class="course-top">🧪</div><div class="course-body"><h3>Hóa học</h3><p>Phản ứng, phương trình và bài tập hóa học.</p><a href="#lienhe">Đang phát triển →</a></div></article>
+<article class="course" data-search="lịch sử địa lý"><div class="course-top">🌏</div><div class="course-body"><h3>Lịch sử - Địa lý</h3><p>Khám phá lịch sử và kiến thức địa lý.</p><a href="#lienhe">Đang phát triển →</a></div></article>
+</div><p id="noResults" hidden style="text-align:center;padding:20px">Không tìm thấy chuyên mục phù hợp.</p></section>
 
-<input class="search" id="search"
- placeholder="Tìm kiếm bài học, chương hoặc kiến thức..."
- oninput="searchLessons()">
-
-<div class="layout">
-
-<!-- DANH MỤC -->
-<aside class="panel sidebar">
- <h3>CHƯƠNG TRÌNH HỌC</h3>
- <div id="chapterList"></div>
-</aside>
-
-<!-- NỘI DUNG -->
-<section class="content" id="content">
-
- <article class="content-box">
-  <span class="tag">GIỚI THIỆU MÔN HỌC</span>
-  <h2>Chào mừng đến với Toán 12</h2>
-  <p>
-   Hệ thống tổng hợp kiến thức Toán 12 theo bộ sách
-   Kết nối tri thức với cuộc sống.
-  </p>
-  <h3>Bạn sẽ học được gì?</h3>
-  <ul>
-   <li>Nắm vững lý thuyết của từng bài.</li>
-   <li>Hiểu bản chất các công thức toán học.</li>
-   <li>Biết cách áp dụng vào từng dạng bài tập.</li>
-   <li>Rèn luyện kỹ năng giải toán.</li>
-   <li>Ôn tập kiến thức theo từng chương.</li>
-  </ul>
-  <div class="example">
-   <strong>Bắt đầu học:</strong>
-   <p>Chọn một chương và bài học ở danh mục bên trái.</p>
-  </div>
- </article>
-
+<!-- TOAN 12 -->
+<section class="math12" id="toan12">
+<div class="math-banner"><span>📐 CHƯƠNG TRÌNH TOÁN THPT</span><h2>TOÁN HỌC LỚP 12</h2><p>Bộ sách Kết nối tri thức với cuộc sống · Tập 1 và Tập 2</p><p>6 chương · 19 bài học · Lý thuyết · Công thức · Ví dụ · Bài tập</p></div>
+<div class="math-toolbar"><button class="math-action" onclick="closeMath12()">← Quay lại trang chủ</button><button class="math-action" onclick="showOverview()">Tổng quan chương trình</button></div>
+<div class="math-layout"><aside class="math-sidebar"><h3>📚 DANH MỤC BÀI HỌC</h3><div id="chapterNavigation"></div><p class="math-meta">Chọn bài để xem nội dung học tập.</p></aside><article class="math-content" id="mathLessonContent"><h2>Chào mừng đến với Toán 12</h2><p>Chọn một chương và bài học ở danh mục bên trái để bắt đầu.</p></article></div>
 </section>
 
-<!-- KIẾN THỨC BÊN PHẢI -->
-<aside class="rightbar">
- <div class="panel right-card">
-  <h3>PHƯƠNG PHÁP HỌC</h3>
-  <p>1. Đọc lý thuyết.</p>
-  <p>2. Ghi nhớ công thức.</p>
-  <p>3. Xem ví dụ.</p>
-  <p>4. Tự giải bài tập.</p>
- </div>
- <div class="panel right-card">
-  <h3>MỤC TIÊU</h3>
-  <p>Hiểu bản chất kiến thức, không chỉ học thuộc công thức.</p>
- </div>
-</aside>
-
-</div>
+<section class="section" id="tailieu"><div class="section-heading"><h2>KHO TÀI LIỆU</h2></div><div class="panel"><p>📂 Tài liệu ôn tập: Đang cập nhật.</p><p>📂 Đề luyện tập: Đang cập nhật.</p><p>📂 Kiến thức tổng hợp: Đang cập nhật.</p></div></section>
 </main>
-
-<footer>
- ONLUYENHVN © 2026
- <br>Website học tập độc lập
-</footer>
+<footer class="footer" id="lienhe"><div class="footer-grid"><div><h3>ONLUYENHVN</h3><p>Cổng thông tin học tập và ôn luyện trực tuyến. Dự án độc lập phục vụ mục đích học tập.</p></div>
+<div><h3>LIÊN KẾT</h3><a href="#">Trang chủ</a><a href="#gioithieu">Giới thiệu</a><a href="#tailieu">Tài liệu</a></div>
+<div><h3>THÔNG TIN</h3><a href="#thongbao">Thông báo</a><a href="#lienhe">Liên hệ</a><a href="https://github.com/vanduc123-ad/OnLuyenHVN">GitHub dự án</a></div></div>
+<div class="copyright">© 2026 OnLuyenHVN. Website học tập độc lập. Không thuộc cơ quan nhà nước.</div></footer>
 
 <script>
-const chapters = [
-{
- name:"Chương I. Ứng dụng đạo hàm",
- lessons:[
- ["Bài 1. Tính đơn điệu và cực trị của hàm số",
-  "Xét tính đồng biến, nghịch biến và xác định điểm cực trị."],
- ["Bài 2. Giá trị lớn nhất và nhỏ nhất",
-  "Tìm GTLN, GTNN trên khoảng và đoạn."],
- ["Bài 3. Đường tiệm cận",
-  "Tiệm cận đứng, ngang và xiên."],
- ["Bài 4. Khảo sát và vẽ đồ thị",
-  "Khảo sát sự biến thiên và dựng đồ thị hàm số."],
- ["Bài 5. Ứng dụng đạo hàm thực tiễn",
-  "Giải quyết bài toán tối ưu và các vấn đề thực tế."]
- ]
-},
-{
- name:"Chương II. Vectơ trong không gian",
- lessons:[
- ["Bài 6. Vectơ trong không gian","Các phép toán vectơ và tích vô hướng."],
- ["Bài 7. Hệ trục tọa độ trong không gian","Tọa độ điểm và vectơ trong không gian."],
- ["Bài 8. Biểu thức tọa độ của vectơ","Các phép toán vectơ bằng tọa độ."]
- ]
-},
-{
- name:"Chương III. Thống kê",
- lessons:[
- ["Bài 9. Khoảng biến thiên và khoảng tứ phân vị","Đo độ phân tán của mẫu số liệu ghép nhóm."],
- ["Bài 10. Phương sai và độ lệch chuẩn","Đánh giá mức độ phân tán của dữ liệu."]
- ]
-},
-{
- name:"Chương IV. Nguyên hàm và tích phân",
- lessons:[
- ["Bài 11. Nguyên hàm","Khái niệm, tính chất và bảng nguyên hàm."],
- ["Bài 12. Tích phân","Định nghĩa và tính chất tích phân."],
- ["Bài 13. Ứng dụng hình học của tích phân","Tính diện tích hình phẳng và thể tích."]
- ]
-},
-{
- name:"Chương V. Tọa độ trong không gian",
- lessons:[
- ["Bài 14. Phương trình mặt phẳng","Vectơ pháp tuyến và phương trình mặt phẳng."],
- ["Bài 15. Phương trình đường thẳng","Phương trình tham số và chính tắc."],
- ["Bài 16. Công thức tính góc","Góc giữa đường thẳng, mặt phẳng và các đối tượng."],
- ["Bài 17. Phương trình mặt cầu","Tâm, bán kính và phương trình mặt cầu."]
- ]
-},
-{
- name:"Chương VI. Xác suất có điều kiện",
- lessons:[
- ["Bài 18. Xác suất có điều kiện","Khái niệm và công thức xác suất có điều kiện."],
- ["Bài 19. Công thức xác suất toàn phần và Bayes","Vận dụng xác suất toàn phần và công thức Bayes."]
- ]
-}
-];
+const menuBtn=document.getElementById("menuBtn"),navLinks=document.getElementById("navLinks");
+menuBtn.addEventListener("click",()=>navLinks.classList.toggle("show"));
+document.querySelectorAll(".nav-links a").forEach(a=>a.addEventListener("click",()=>navLinks.classList.remove("show")));
+function updateClock(){const n=new Date();document.getElementById("clock").textContent=n.toLocaleDateString("vi-VN")+" | "+n.toLocaleTimeString("vi-VN")}
+updateClock();setInterval(updateClock,1000);
+document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDefault();const q=document.getElementById("searchInput").value.trim().toLowerCase();let count=0;document.querySelectorAll(".course").forEach(c=>{const ok=(c.innerText+" "+c.dataset.search).toLowerCase().includes(q);c.style.display=ok?"":"none";if(ok)count++});document.getElementById("noResults").hidden=count!==0;document.getElementById("monhoc").scrollIntoView({behavior:"smooth"})});
 
-function renderChapters(){
- const root=document.getElementById("chapterList");
- root.innerHTML="";
-
- chapters.forEach((chapter,ci)=>{
-  const box=document.createElement("div");
-  box.className="chapter"+(ci===0?" open":"");
-
-  const title=document.createElement("button");
-  title.className="chapter-title";
-  title.textContent=(ci+1)+". "+chapter.name;
-  title.onclick=()=>box.classList.toggle("open");
-
-  const list=document.createElement("div");
-  list.className="lessons";
-
-  chapter.lessons.forEach((lesson,li)=>{
-   const btn=document.createElement("button");
-   btn.className="lesson-link";
-   btn.textContent=lesson[0];
-   btn.dataset.search=(lesson[0]+" "+lesson[1]+" "+chapter.name).toLowerCase();
-   btn.onclick=()=>{
-    document.querySelectorAll(".lesson-link").forEach(x=>x.classList.remove("active"));
-    btn.classList.add("active");
-    showLesson(ci,li);
-   };
-   list.appendChild(btn);
-  });
-
-  box.append(title,list);
-  root.appendChild(box);
- });
-}
-
-function showLesson(ci,li){
- const lesson=chapters[ci].lessons[li];
- const area=document.getElementById("content");
-
- let detail="Nội dung này sẽ được trình bày theo các phần: khái niệm, lý thuyết, công thức, ví dụ minh họa, bài tập và tổng kết.";
-
- if(ci===0 && li===0){
-  detail=`
-   <h3>1. Tính đơn điệu của hàm số</h3>
-   <p>
-    Một hàm số được gọi là đồng biến trên một khoảng
-    nếu khi x tăng thì giá trị hàm số cũng tăng.
-   </p>
-   <p>
-    Hàm số nghịch biến nếu khi x tăng thì giá trị hàm số giảm.
-   </p>
-
-   <div class="formula">
-    Nếu f'(x) > 0 trên khoảng K thì f(x) đồng biến trên K.
-   </div>
-   <div class="formula">
-    Nếu f'(x) < 0 trên khoảng K thì f(x) nghịch biến trên K.
-   </div>
-
-   <h3>2. Các bước xét tính đơn điệu</h3>
-   <ul>
-    <li>Tìm tập xác định của hàm số.</li>
-    <li>Tính đạo hàm f'(x).</li>
-    <li>Giải phương trình f'(x) = 0.</li>
-    <li>Lập bảng xét dấu đạo hàm.</li>
-    <li>Kết luận khoảng đồng biến và nghịch biến.</li>
-   </ul>
-
-   <h3>3. Cực trị của hàm số</h3>
-   <p>
-    Điểm cực đại là điểm mà hàm số chuyển từ tăng sang giảm.
-    Điểm cực tiểu là điểm mà hàm số chuyển từ giảm sang tăng.
-   </p>
-
-   <div class="formula">
-    f'(x) đổi dấu từ + sang -: cực đại.
+const chapters=[
+{title:"Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị hàm số",lessons:[
+["Bài 1. Tính đơn điệu và cực trị của hàm số","Tính đơn điệu mô tả chiều biến thiên của hàm số trên một khoảng. Nếu f'(x)>0 trên khoảng I thì f đồng biến; nếu f'(x)<0 thì f nghịch biến. Điểm tới hạn là điểm trong miền xác định mà f'(x)=0 hoặc f' không tồn tại. Cực trị được xác định bằng sự đổi dấu của đạo hàm qua điểm đó.","Quy tắc: lập f'(x), tìm nghiệm f'(x)=0; xét dấu f'(x) trên các khoảng. Đạo hàm đổi dấu từ + sang −: cực đại; từ − sang +: cực tiểu. Nếu không đổi dấu thì không có cực trị tại điểm đó.","Cho f(x)=x³−3x. Ta có f'(x)=3x²−3=3(x−1)(x+1). Đạo hàm dương khi x<−1 hoặc x>1, âm khi −1<x<1. Vậy hàm đồng biến trên (−∞,−1), (1,+∞), nghịch biến trên (−1,1). f(−1)=2 là cực đại; f(1)=−2 là cực tiểu.","Xét f(x)=x²−4x+1. Tìm khoảng đồng biến, nghịch biến và cực trị.","f'(x)=2x−4. Hàm nghịch biến trên (−∞,2), đồng biến trên (2,+∞); đạt cực tiểu f(2)=−3."],
+["Bài 2. Giá trị lớn nhất và giá trị nhỏ nhất của hàm số","Giá trị lớn nhất (GTLN) M của f trên tập D thỏa f(x)≤M với mọi x thuộc D và có ít nhất một điểm đạt dấu bằng. Giá trị nhỏ nhất (GTNN) m được định nghĩa tương tự. Trên đoạn [a,b], hàm liên tục luôn có GTLN và GTNN.","Cách tìm trên đoạn [a,b]: tính f'(x); tìm các điểm tới hạn thuộc (a,b); tính f tại các điểm đó và hai đầu mút a,b; so sánh các giá trị. Trên khoảng không đóng cần xét thêm giới hạn ở biên.","Tìm GTLN, GTNN của f(x)=x²−2x trên [0,3]. Ta có f'(x)=2x−2=0 khi x=1. Tính f(0)=0, f(1)=−1, f(3)=3. Vậy GTNN là −1, GTLN là 3.","Tìm GTLN và GTNN của f(x)=−x²+4x trên [0,5].","f'(x)=−2x+4=0 tại x=2. f(0)=0, f(2)=4, f(5)=−5. GTLN 4; GTNN −5."],
+["Bài 3. Đường tiệm cận của đồ thị hàm số","Tiệm cận đứng x=a nếu ít nhất một trong hai giới hạn một phía của f(x) khi x→a⁻ hoặc x→a⁺ là vô cực. Tiệm cận ngang y=b nếu lim x→±∞ f(x)=b. Tiệm cận xiên y=ax+b nếu lim x→±∞[f(x)−(ax+b)]=0.","Với phân thức hữu tỉ: nghiệm của mẫu có thể tạo tiệm cận đứng sau khi rút gọn nhân tử chung. Nếu bậc tử nhỏ hơn bậc mẫu thì y=0 là tiệm cận ngang; nếu bằng nhau thì tiệm cận ngang là tỉ số hệ số bậc cao nhất.","Xét f(x)=(2x+1)/(x−3). Mẫu bằng 0 tại x=3, tử không bằng 0 nên có tiệm cận đứng x=3. Hai đa thức cùng bậc nên tiệm cận ngang y=2.","Tìm các tiệm cận của y=(3x−2)/(x+1).","Tiệm cận đứng x=−1; tiệm cận ngang y=3."],
+["Bài 4. Khảo sát sự biến thiên và vẽ đồ thị của hàm số","Khảo sát hàm số thường gồm: tập xác định; đạo hàm; chiều biến thiên và cực trị; giới hạn và tiệm cận; bảng biến thiên; các giao điểm với trục tọa độ và phác họa đồ thị. Với hàm đa thức, đồ thị liên tục trên R; với hàm phân thức cần chú ý điểm loại khỏi tập xác định.","Quy trình: (1) Tìm tập xác định. (2) Tính f'(x), giải f'(x)=0. (3) Lập bảng dấu đạo hàm. (4) Tính giới hạn ở biên miền xác định và vô cực. (5) Tìm giao trục, điểm đặc biệt. (6) Vẽ đồ thị phù hợp với bảng biến thiên.","Khảo sát y=x³−3x: tập xác định R; y'=3(x²−1). Các điểm tới hạn −1,1. Hàm đồng biến trên (−∞,−1), (1,+∞), nghịch biến trên (−1,1); cực đại (−1,2), cực tiểu (1,−2). Đồ thị đi qua gốc tọa độ.","Với y=x²−4x+3, hãy tìm đỉnh, trục đối xứng và giao điểm với hai trục tọa độ.","Viết y=(x−2)²−1. Đỉnh I(2,−1), trục x=2; giao Ox tại x=1,3; giao Oy tại (0,3)."],
+["Bài 5. Ứng dụng đạo hàm để giải quyết một số vấn đề liên quan đến thực tiễn","Đạo hàm biểu diễn tốc độ thay đổi tức thời. Trong bài toán tối ưu, đại lượng cần tối ưu được biểu diễn thành hàm một biến trên miền phù hợp, sau đó tìm cực trị hoặc GTLN, GTNN. Cần kiểm tra điều kiện thực tế và đơn vị.","Mô hình hóa: chọn biến x; biểu diễn đại lượng cần tìm P(x); xác định miền giá trị của x; tính P'(x); tìm điểm tới hạn và so sánh cả biên; diễn giải kết quả bằng lời và đơn vị.","Một hình chữ nhật có chu vi 20 m, một cạnh x thì cạnh kia 10−x. Diện tích S=x(10−x), 0<x<10. S'=10−2x=0 khi x=5. Diện tích lớn nhất là 25 m², đạt khi hình vuông cạnh 5 m.","Một mảnh vườn hình chữ nhật có chu vi 40 m. Tìm diện tích lớn nhất có thể.","Gọi cạnh là x và 20−x. S=x(20−x), lớn nhất tại x=10; diện tích lớn nhất 100 m²."]]},
+{title:"Chương II. Vectơ và hệ trục tọa độ trong không gian",lessons:[
+["Bài 6. Vectơ trong không gian","Vectơ trong không gian là đoạn thẳng có hướng. Hai vectơ bằng nhau khi cùng hướng và cùng độ dài. Vectơ-không có điểm đầu trùng điểm cuối. Các phép cộng,   f'(x) đổi dấu từ + sang -: cực đại.
     <br>
     f'(x) đổi dấu từ - sang +: cực tiểu.
    </div>
