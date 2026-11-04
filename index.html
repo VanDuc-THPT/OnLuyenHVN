@@ -1,85 +1,335 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="OnLuyenHVN - Cổng thông tin học tập và ôn luyện kiến thức trực tuyến.">
-<meta name="theme-color" content="#123b70">
-<title>OnLuyenHVN - Cổng thông tin học tập</title>
-<style>
-:root{--blue:#123b70;--blue2:#1d5595;--red:#c62828;--gold:#e5b94c;--bg:#f2f5f9;--white:#fff;--text:#26364a;--muted:#718096}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}a{text-decoration:none;color:inherit}
-.topbar{background:#102e53;color:white;padding:8px 5%;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.header{background:white;padding:20px 5%;display:flex;align-items:center;gap:16px;border-bottom:3px solid var(--red)}
-.logo{width:65px;height:65px;border-radius:12px;background:var(--blue);color:white;display:grid;place-items:center;font-size:26px;font-weight:bold}
-.brand h1{font-size:25px;color:var(--blue)}.brand p{font-size:12px;color:var(--muted)}
-.nav{background:var(--blue);color:white;padding:0 5%;display:flex;align-items:center;justify-content:space-between}.nav-links{display:flex;align-items:center;flex-wrap:wrap}
-.nav-links a{display:block;padding:15px 17px;font-size:14px;transition:.25s}.nav-links a:hover,.nav-links a.active{background:var(--blue2);border-bottom:3px solid var(--gold)}
-.menu-btn{display:none;background:transparent;border:0;color:white;font-size:25px;padding:10px;cursor:pointer}
-.hero{background:linear-gradient(110deg,rgba(10,42,83,.96),rgba(29,85,149,.88));color:white;padding:65px 7%;position:relative;overflow:hidden}
-.hero:after{content:"EDUCATION";position:absolute;right:-20px;bottom:-35px;font-size:clamp(60px,12vw,150px);font-weight:bold;color:rgba(255,255,255,.045);pointer-events:none}
-.hero-content{max-width:720px;position:relative;z-index:1}.hero-label{display:inline-block;border:1px solid rgba(255,255,255,.4);padding:5px 13px;border-radius:4px;font-size:12px;margin-bottom:17px}
-.hero h2{font-size:clamp(28px,5vw,43px);line-height:1.25;margin-bottom:15px}.hero p{color:#dce9f7;margin-bottom:25px;max-width:600px}
-.hero-btn{display:inline-block;background:var(--gold);color:#172c46;padding:12px 24px;border-radius:5px;font-weight:bold;transition:.3s}.hero-btn:hover{transform:translateY(-3px);background:#f5d477}
-.search-area{max-width:1000px;margin:-25px auto 35px;padding:0 18px;position:relative;z-index:2}.search-box{background:white;padding:12px;display:flex;border-radius:8px;box-shadow:0 5px 25px #102e5315}
-.search-box input{flex:1;min-width:0;border:0;outline:none;padding:10px;font-size:14px}.search-box button{border:0;background:var(--blue);color:white;padding:10px 20px;border-radius:5px;cursor:pointer}
-.container{width:90%;max-width:1200px;margin:auto}.section{margin:38px 0}.section-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:2px solid #dce3ec;padding-bottom:12px;margin-bottom:20px}
-.section-heading h2{color:var(--blue);font-size:21px;border-left:4px solid var(--red);padding-left:12px}.view-all{color:var(--blue2);font-size:13px;font-weight:bold}
-.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.quick-card{background:white;padding:23px 12px;text-align:center;border-radius:7px;border:1px solid #e5eaf0;transition:.3s}
-.quick-card:hover{transform:translateY(-5px);box-shadow:0 8px 25px #123b7015;border-color:var(--blue2)}.quick-icon{font-size:32px;margin-bottom:10px}
-.quick-card h3{color:var(--blue);font-size:15px}.quick-card p{font-size:12px;color:var(--muted);margin-top:5px}
-.content-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:22px}.panel{background:white;padding:22px;border:1px solid #e5eaf0;border-radius:7px}
-.notice{padding:14px 0;border-bottom:1px solid #edf0f4}.notice:last-child{border-bottom:0}.notice small{color:var(--red);font-weight:bold}
-.notice h3{font-size:14px;color:var(--blue);margin:4px 0}.notice p{color:var(--muted);font-size:12px}
-.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.course{background:white;border:1px solid #e5eaf0;border-radius:8px;overflow:hidden;transition:.3s}
-.course:hover{transform:translateY(-5px);box-shadow:0 8px 25px #123b7015}.course-top{padding:25px;background:linear-gradient(135deg,#123b70,#3679bd);color:white;font-size:35px}
-.course-body{padding:18px}.course-body h3{color:var(--blue);font-size:16px}.course-body p{font-size:13px;color:var(--muted);margin:8px 0 15px}
-.course-body a{display:inline-block;color:var(--blue2);font-weight:bold;font-size:13px}
-.footer{background:#102e53;color:white;margin-top:55px;padding:40px 5% 18px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
-.footer h3{color:var(--gold);margin-bottom:13px}.footer p,.footer a{font-size:13px;color:#d0dceb}.footer a{display:block;margin:7px 0}
-.copyright{border-top:1px solid #ffffff25;text-align:center;margin-top:30px;padding-top:17px;font-size:12px;color:#bdcce0}
-.fade-in{animation:fadeIn .8s ease both}@keyframes fadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:768px){.header{padding:15px 5%}.logo{width:52px;height:52px}.brand h1{font-size:19px}.brand p{font-size:10px}
-.menu-btn{display:block;margin-left:auto}.nav{padding:0 5%;display:block}.nav-links{display:none;flex-direction:column;align-items:stretch}.nav-links.show{display:flex}
-.nav-links a{border-bottom:1px solid #ffffff20}.hero{padding:48px 6%}.quick-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-.content-grid,.course-grid,.footer-grid{grid-template-columns:1fr}.section-heading h2{font-size:17px}}
-@media(min-width:769px) and (max-width:1000px){.quick-grid{grid-template-columns:repeat(2,1fr)}.course-grid{grid-template-columns:repeat(2,1fr)}}
-
-/* KHU VUC TOAN 12 - chi bo sung, khong doi giao dien trang chu */
-.math12{display:none;margin:35px 0;animation:fadeIn .5s ease}.math12.show{display:block}
-.math-banner{background:linear-gradient(120deg,#123b70,#3679bd);color:white;padding:28px;border-radius:8px;margin-bottom:20px}
-.math-banner h2{font-size:25px;margin:5px 0}.math-banner p{color:#e0ecf8;font-size:14px}
-.math-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
-.math-layout{display:grid;grid-template-columns:290px 1fr;gap:20px;align-items:start}
-.math-sidebar,.math-content{background:white;border:1px solid #e5eaf0;border-radius:8px;padding:18px;min-width:0}
-.math-sidebar{position:sticky;top:12px;max-height:78vh;overflow:auto}.math-sidebar h3{color:var(--blue);margin-bottom:12px}
-.chapter-button,.lesson-button{display:block;width:100%;text-align:left;border:1px solid #e1e8f0;background:#f4f7fb;padding:10px;margin:6px 0;border-radius:5px;color:var(--text);cursor:pointer;font-size:13px;line-height:1.5}
-.chapter-button.active,.chapter-button:hover,.lesson-button.active,.lesson-button:hover{background:#e7f0fb;border-color:var(--blue2);color:var(--blue)}
-.lesson-list{padding-left:9px}.lesson-button{background:white;border:0;border-bottom:1px solid #edf0f4;border-radius:0}
-.math-content h2{color:var(--blue);font-size:23px;margin-bottom:8px}.math-content h3{color:var(--blue2);font-size:17px;margin:22px 0 10px;border-left:3px solid var(--red);padding-left:10px}
-.math-content p,.math-content li{font-size:14px;line-height:1.8}.math-content ul,.math-content ol{padding-left:22px;margin:8px 0}
-.math-formula{background:#f0f5fb;border-left:4px solid var(--blue2);padding:13px;border-radius:5px;margin:12px 0;font-family:"Times New Roman",serif;font-size:16px;overflow-wrap:anywhere}
-.math-example{background:#fffaf0;border:1px solid #f0dfb8;border-radius:6px;padding:15px;margin:12px 0}
-.math-exercise{background:#f4f8f5;border:1px solid #d8e9dc;border-radius:6px;padding:15px;margin:12px 0}
-.math-answer{display:none;background:#eaf5ed;padding:12px;margin-top:10px;border-radius:5px;color:#245b35;font-size:14px}.math-answer.show{display:block}
-.math-action{border:0;background:var(--blue);color:white;padding:9px 14px;border-radius:5px;cursor:pointer}.math-action:hover{background:var(--blue2)}
-.math-meta{font-size:12px;color:var(--muted);margin:8px 0 15px}.math-note{background:#fff7e6;border:1px solid #f0dfb8;padding:12px;border-radius:5px;margin:14px 0;font-size:13px}
-@media(max-width:768px){.math-layout{grid-template-columns:1fr}.math-sidebar{position:static;max-height:none}.math-banner h2{font-size:21px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System & Device Diagnostic Tool - Văn Đức</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0f172a',
+                        cardBg: '#1e293b',
+                        accentBlue: '#38bdf8',
+                        accentGreen: '#4ade80',
+                        accentPurple: '#c084fc',
+                        accentRed: '#f87171'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth scrolling and custom scrollbars */
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        .glow-card {
+            box-shadow: 0 4px 20px -2px rgba(56, 189, 248, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glow-card:hover {
+            box-shadow: 0 8px 30px -2px rgba(56, 189, 248, 0.15);
+        }
+        .touch-pad {
+            touch-action: none;
+        }
+    </style>
 </head>
-<body>
-<div class="topbar"><span>CỔNG THÔNG TIN HỌC TẬP ĐIỆN TỬ</span><span id="clock">Đang tải thời gian...</span></div>
-<header class="header"><div class="logo">OL</div><div class="brand"><h1>ONLUYENHVN</h1><p>CỔNG THÔNG TIN HỌC TẬP VÀ ÔN LUYỆN</p></div><button class="menu-btn" id="menuBtn" aria-label="Mở menu">☰</button></header>
-<nav class="nav"><div class="nav-links" id="navLinks">
-<a href="#" class="active">⌂ Trang chủ</a><a href="#gioithieu">Giới thiệu</a><a href="#chucnang">Chức năng</a><a href="#thongbao">Thông báo</a><a href="#tailieu">Tài liệu</a><a href="#lienhe">Liên hệ</a>
-</div></nav>
-<section class="hero"><div class="hero-content fade-in"><span class="hero-label">NỀN TẢNG HỌC TẬP TRỰC TUYẾN</span><h2>Học tập hôm nay<br>Kiến thức ngày mai</h2><p>OnLuyenHVN cung cấp không gian ôn luyện, tra cứu kiến thức và hỗ trợ học tập trực tuyến.</p><a href="#chucnang" class="hero-btn">KHÁM PHÁ NGAY →</a></div></section>
-<div class="search-area"><form class="search-box" id="searchForm"><input id="searchInput" type="search" placeholder="Tìm kiếm môn học, tài liệu..."><button type="submit">Tìm kiếm</button></form></div>
-<main class="container">
-<section class="section" id="chucnang"><div class="section-heading"><h2>TRUY CẬP NHANH</h2><span class="view-all">ONLUYENHVN</span></div>
-<div class="quick-grid">
-<a href="#tailieu" class="quick-card"><div class="quick-icon">📚</div><h3>Kho tài liệu</h3><p>Tài liệu học tập</p></a>
-<a href="#monhoc" class="quick-card"><div class="quick-icon">📝</div><h3>Ôn luyện</h3><p>Luyện tập kiến thức</p></a>
+<body class="bg-darkBg text-slate-100 min-h-screen flex flex-col justify-between selection:bg-sky-500 selection:text-white">
+
+    <!-- HEADER -->
+    <header class="bg-cardBg/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-700/60 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-sky-500/30">
+                    <i class="fa-solid to-laptop-medical text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-sky-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
+                        System & Device Diagnostic Tool
+                    </h1>
+                    <p class="text-xs text-slate-400 flex items-center gap-2">
+                        <span><i class="fa-solid fa-user text-sky-400"></i> Tác giả: <strong class="text-slate-200">Văn Đức</strong></span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-envelope text-sky-400"></i> <a href="mailto:phamvanduclop91@gmail.com" class="hover:underline text-slate-300">phamvanduclop91@gmail.com</a></span>
+                    </p>
+                </div>
+            </div>
+            <!-- Quick Actions Header -->
+            <div class="flex items-center gap-2">
+                <button onclick="exportReport('json')" class="px-3 py-1.5 text-xs font-medium bg-slate-800 hover:bg-slate-700 text-sky-400 border border-sky-500/30 rounded-lg transition-all flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-file-code"></i> JSON Report
+                </button>
+                <button onclick="exportReport('txt')" class="px-3 py-1.5 text-xs font-medium bg-sky-600 hover:bg-sky-500 text-white rounded-lg transition-all flex items-center gap-1.5 shadow-sm shadow-sky-600/30">
+                    <i class="fa-solid fa-download"></i> TXT Report
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full space-y-8 flex-grow">
+
+        <!-- SECTION 1: DEVICE DIAGNOSTICS & SYSTEM INFO -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-sky-400 flex items-center gap-2">
+                    <i class="fa-solid fa-microchip"></i> Thông Tin Thiết Bị & Hệ Thống
+                </h2>
+                <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Realtime Active
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- OS & Browser -->
+                <div class="bg-cardBg p-4 rounded-xl border border-slate-700/60 glow-card space-y-2">
+                    <div class="flex items-center gap-2 text-slate-400 text-sm font-medium">
+                        <i class="fa-brands fa-windows text-blue-400"></i> HĐH & Trình duyệt
+                    </div>
+                    <div id="os-browser-info" class="text-sm space-y-1">
+                        <p class="font-semibold text-slate-200" id="info-os">Đang tải...</p>
+                        <p class="text-xs text-slate-400" id="info-browser">--</p>
+                    </div>
+                </div>
+
+                <!-- Display & Screen -->
+                <div class="bg-cardBg p-4 rounded-xl border border-slate-700/60 glow-card space-y-2">
+                    <div class="flex items-center gap-2 text-slate-400 text-sm font-medium">
+                        <i class="fa-solid fa-desktop text-purple-400"></i> Màn hình & Hiển thị
+                    </div>
+                    <div class="text-sm space-y-1">
+                        <p class="font-semibold text-slate-200" id="info-screen-res">-- x --</p>
+                        <p class="text-xs text-slate-400">Viewport: <span id="info-viewport" class="text-slate-300">--</span> | DPR: <span id="info-dpr" class="text-slate-300">--</span></p>
+                    </div>
+                </div>
+
+                <!-- Battery Status -->
+                <div class="bg-cardBg p-4 rounded-xl border border-slate-700/60 glow-card space-y-2">
+                    <div class="flex items-center justify-between text-slate-400 text-sm font-medium">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-battery-half text-green-400"></i> Trạng thái Pin</span>
+                        <span id="battery-status-badge" class="text-xs px-2 py-0.5 rounded bg-slate-700 text-slate-300">--</span>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline justify-between mb-1">
+                            <span id="battery-level-text" class="text-lg font-bold text-slate-100">--%</span>
+                            <span id="battery-charging-text" class="text-xs text-slate-400">--</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden border border-slate-700">
+                            <div id="battery-bar" class="bg-emerald-400 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Network Status -->
+                <div class="bg-cardBg p-4 rounded-xl border border-slate-700/60 glow-card space-y-2">
+                    <div class="flex items-center justify-between text-slate-400 text-sm font-medium">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-wifi text-amber-400"></i> Kết nối Mạng</span>
+                        <span id="net-status-badge" class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Online</span>
+                    </div>
+                    <div class="text-sm space-y-1">
+                        <p class="font-semibold text-slate-200" id="net-type">Loại mạng: Unknown</p>
+                        <p class="text-xs text-slate-400">Băng thông: <span id="net-downlink" class="text-slate-300">-- Mbps</span> | RTT: <span id="net-rtt" class="text-slate-300">-- ms</span></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Hardware Spec & GPS Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Hardware Specs -->
+                <div class="bg-cardBg p-4 rounded-xl border border-slate-700/60 glow-card flex items-center justify-between">
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Số nhân CPU (Concurrency)</p>
+                        <p id="info-cpu" class="text-2xl font-bold text-sky-400 mt-1">-- Cores</p>
+                    </div>
+                    <div class="p-3 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20">
+                        <i class="fa-solid fa-microchip text-2xl"></i>
+                    </div>
+                </div>
+
+                <div class="bg-cardBg p-4 rounded-xl border border-slate-700/60 glow-card flex items-center justify-between">
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Dung lượng RAM ước tính</p>
+                        <p id="info-ram" class="text-2xl font-bold text-indigo-400 mt-1">-- GB</p>
+                    </div>
+                    <div class="p-3 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
+                        <i class="fa-solid fa-memory text-2xl"></i>
+                    </div>
+                </div>
+
+                <!-- GPS Location Tester -->
+                <div class="bg-cardBg p-4 rounded-xl border border-slate-700/60 glow-card flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Cảm biến GPS / Định vị</span>
+                        <button onclick="getGPSLocation()" class="text-xs px-2.5 py-1 bg-sky-600 hover:bg-sky-500 text-white font-medium rounded transition">
+                            <i class="fa-solid fa-location-crosshairs mr-1"></i> Lấy tọa độ
+                        </button>
+                    </div>
+                    <p id="gps-coords" class="text-xs text-slate-300 font-mono mt-2 truncate">Tọa độ: Chưa lấy dữ liệu</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: STORAGE & ADVANCED FILE INSPECTOR -->
+        <section class="space-y-4">
+            <h2 class="text-lg font-semibold text-purple-400 flex items-center gap-2">
+                <i class="fa-solid fa-hard-drive"></i> Quản Lý Dung Lượng & Kiểm Tra File
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Browser Storage Quota -->
+                <div class="bg-cardBg p-5 rounded-xl border border-slate-700/60 glow-card space-y-4 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-database text-sky-400"></i> Dung lượng Bộ nhớ Trình duyệt (Storage Quota)
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1">Ước tính bộ nhớ khả dụng của trình duyệt (IndexedDB / CacheStorage).</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-400">Đã dùng: <strong id="storage-used" class="text-slate-200">-- MB</strong></span>
+                            <span class="text-slate-400">Tổng quota: <strong id="storage-total" class="text-slate-200">-- GB</strong></span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden border border-slate-700">
+                            <div id="storage-bar" class="bg-purple-500 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                        <p id="storage-percent" class="text-xs text-right text-purple-400 font-mono">0% đã sử dụng</p>
+                    </div>
+
+                    <!-- Local Storage Benchmark -->
+                    <div class="pt-3 border-t border-slate-700/50 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-slate-400">Tốc độ Ghi/Đọc LocalStorage</p>
+                            <span id="speed-test-result" class="text-xs font-semibold text-emerald-400">Chưa test</span>
+                        </div>
+                        <button onclick="runStorageSpeedTest()" class="px-3 py-1.5 text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg transition">
+                            <i class="fa-solid fa-bolt text-amber-400 mr-1"></i> Test Speed
+                        </button>
+                    </div>
+                </div>
+
+                <!-- File Inspector Upload & Dropzone -->
+                <div class="lg:col-span-2 bg-cardBg p-5 rounded-xl border border-slate-700/60 glow-card space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                                <i class="fa-solid fa-file-circle-check text-purple-400"></i> File Inspector (Upload & Analysis)
+                            </h3>
+                            <p class="text-xs text-slate-400">Kéo thả file hoặc chọn nhiều file để kiểm tra thông số chi tiết & xem trước.</p>
+                        </div>
+                        <span id="total-file-summary" class="text-xs px-3 py-1 rounded-full bg-slate-800 text-purple-300 border border-purple-500/20 font-mono">
+                            0 files (0 MB)
+                        </span>
+                    </div>
+
+                    <!-- Drop Zone -->
+                    <div id="drop-zone" class="border-2 border-dashed border-slate-600 hover:border-purple-400 bg-slate-900/50 hover:bg-slate-900/80 rounded-xl p-6 text-center cursor-pointer transition flex flex-col items-center justify-center gap-2">
+                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-purple-400 animate-bounce"></i>
+                        <p class="text-sm font-medium text-slate-200">Kéo & thả file vào đây hoặc <span class="text-purple-400 underline">Click để Duyệt file</span></p>
+                        <p class="text-xs text-slate-500">Hỗ trợ hình ảnh, video, audio, văn bản, PDF...</p>
+                        <input type="file" id="file-input" multiple class="hidden">
+                    </div>
+
+                    <!-- File List Table -->
+                    <div class="overflow-x-auto max-h-60 rounded-lg border border-slate-700/50">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="bg-slate-800 text-slate-400 uppercase tracking-wider sticky top-0">
+                                <tr>
+                                    <th class="p-2.5">Tên File</th>
+                                    <th class="p-2.5">Loại MIME</th>
+                                    <th class="p-2.5">Dung lượng</th>
+                                    <th class="p-2.5">Chỉnh sửa cuối</th>
+                                    <th class="p-2.5 text-center">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="file-list-body" class="divide-y divide-slate-800 bg-slate-900/30">
+                                <tr>
+                                    <td colspan="5" class="p-4 text-center text-slate-500 italic">Chưa chọn file nào. Hãy tải file lên để kiểm tra.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: UTILITY SUITE (FPS, Web Audio, Multi-Touch & Cam/Mic Test) -->
+        <section class="space-y-4">
+            <h2 class="text-lg font-semibold text-emerald-400 flex items-center gap-2">
+                <i class="fa-solid fa-vial"></i> Bộ Công Cụ Test Hiệu Năng & Phần Cứng
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                <!-- FPS & Performance Meter -->
+                <div class="bg-cardBg p-4 rounded-xl border border-slate-700/60 glow-card space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">FPS Realtime</span>
+                        <i class="fa-solid fa-gauge-high text-emerald-400"></i>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <span id="fps-counter" class="text-3xl font-extrabold text-emerald-400">60</span>
+                        <span class="text-xs text-slate-400">FPS</span>
+                    </div>
+                    <p class="text-xs text-slate-400">Thời gian render khung hình (Frame latency): <span id="frame-time" class="text-slate-200">16.6ms</span></p>
+                </div>
+
+                <!-- Web Audio Generator -->
+                <div class="bg-cardBg p-4 rounded-xl border border-slate-700/60 glow-card space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Kiểm tra Âm thanh</span>
+                        <i class="fa-solid fa-volume-high text-amber-400"></i>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="toggleAudioTest()" id="btn-audio-test" class="w-full py-2 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-medium text-xs rounded-lg border border-amber-500/30 transition">
+                            <i class="fa-solid fa-play mr-1"></i> Phát tần số 440Hz
+                        </button>
+                    </div>
+                    <p class="text-xs text-slate-400 text-center">Phát âm bíp kiểm tra loa trái/phải bằng Web Audio API.</p>
+                </div>
+
+                <!-- Multi-Touch Screen Test -->
+                <div class="bg-cardBg p-4 rounded-xl border border-slate-700/60 glow-card space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Cảm Ứng (Touch Test)</span>
+                        <i class="fa-solid fa-hand-pointer text-indigo-400"></i>
+                    </div>
+                    <button onclick="openTouchTestModal()" class="w-full py-2 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 font-medium text-xs rounded-lg border border-indigo-500/30 transition">
+                        <i class="fa-solid fa-up-right-and-down-left-from-center mr-1"></i> Mở Bảng Test Đa Điểm
+                    </button>
+                    <p class="text-xs text-slate-400 text-center" id="touch-points-summary">Hỗ trợ Touch:="quick-card"><div class="quick-icon">📝</div><h3>Ôn luyện</h3><p>Luyện tập kiến thức</p></a>
 <a href="#thongbao" class="quick-card"><div class="quick-icon">📢</div><h3>Thông báo</h3><p>Tin tức mới nhất</p></a>
 <a href="#lienhe" class="quick-card"><div class="quick-icon">✉️</div><h3>Liên hệ</h3><p>Hỗ trợ người dùng</p></a>
 </div></section>
