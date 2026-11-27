@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ôn tập Lịch sử 12 — Ôn tập 12</title>
+<meta name="description" content="Ôn tập trắc nghiệm Lịch sử 12 theo từng bài học (Bài 1 - 17), chuyển thể từ bộ câu hỏi trả lời ngắn." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📜</text></svg>" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container row">
+    <a class="brand" href="index.html" style="text-decoration:none;color:#fff"><span class="star">★</span> <div>Ôn tập 12<small>📜 Lịch sử 12 — Trắc nghiệm theo từng bài học</small></div></a>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button id="themeToggleBtn" class="theme-toggle" onclick="toggleTheme()" title="Chuyển giao diện sáng/tối">🌙</button>
+      <div id="headerRight"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container" id="appRoot"></div>
+</main>
+
+<footer>Ôn tập 12 · Lịch sử · Dữ liệu biên soạn từ bộ câu hỏi trả lời ngắn Bài 1–17 · <a href="index.html">← Về trang chọn môn</a></footer>
+
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script>
+function renderApp() {
+  const root = document.getElementById('appRoot');
+  renderHeaderRight();
+  if (!requireAuthOrRedirect()) return;
+  const user = currentUser();
+
+  const totalQuestions = QUIZ_DATA_LICHSU.reduce((s, l) => s + l.questions.length, 0);
+  const stats = subjectStats(user, 'lichsu', QUIZ_DATA_LICHSU.length);
+
+  root.innerHTML = `
+    <div style="margin-bottom:16px">
+      <a href="index.html" class="btn btn-ghost">← Chọn môn khác</a>
+    </div>
+
+    <div class="card hero">
+      <div class="hero-top">
+        <a href="profile.html" style="text-decoration:none;color:inherit">${avatarHtml(user, 56)}</a>
+        <div>
+          <h1>📜 Ôn tập Lịch sử 12</h1>
+          <p>Chọn một bài học bên dưới để bắt đầu luyện trắc nghiệm. Mỗi bài có đúng số câu như trong tài liệu gốc.</p>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><b>${QUIZ_DATA_LICHSU.length}</b><span>Bài học</span></div>
+        <div class="stat"><b>${totalQuestions}</b><span>Câu hỏi</span></div>
+        <div class="stat"><b>${stats.done}</b><span>Bài đã luyện</span></div>
+        <div class="stat"><b>${stats.avgPct}%</b><span>Điểm trung bình</span></div>
+      </div>
+      <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="quiz.html?subject=lichsu&lesson=all">🎯 Ôn tập tổng hợp (tất cả ${totalQuestions} câu)</a>
+        <a class="btn btn-ghost" href="quiz.html?subject=lichsu&lesson=random40">🎲 Trộn ngẫu nhiên 40 câu</a>
+        <a class="btn btn-ghost" href="profile.html">🪪 Hồ sơ của tôi</a>
+      </div>
+    </div>
+
+    ${LESSON_GROUPS_LICHSU.map(group => {
+      const lessons = QUIZ_DATA_LICHSU.filter(l => group.lessons.includes(l.num));
+      if (!lessons.length) return '';
+      return `
+      <div class="section-title"><h2>${group.title}</h2><span>${lessons.length} bài</span></div>
+      <div class="lesson-grid">
+        ${lessons.map(l => {
+          const p = subjectLessonProgress(user, 'lichsu', l.num);
+          const pct = p ? Math.round((p.bestScore / p.total) * 100) : null;
+          return `
+          <div class="lesson-card">
+            <div class="num">BÀI ${l.num}</div>
+            <h3>${l.title}</h3>
+            <div class="progress-bar"><i style="width:${pct ?? 0}%"></i></div>
+            <div class="meta">
+              <span>${l.questions.length} câu hỏi</span>
+              <span>${pct !== null ? pct + '% điểm tốt nhất' : 'Chưa làm'}</span>
+            </div>
+            <a class="btn btn-primary btn-block" href="quiz.html?subject=lichsu&lesson=${l.num}">Bắt đầu luyện tập</a>
+          </div>`;
+        }).join('')}
+      </div>`;
+    }).join('')}
+  `;
+}
+
+renderApp();
+</script>
+</body>
+</html>

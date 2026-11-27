@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hồ sơ của tôi — Ôn tập 12</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪪</text></svg>" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container row">
+    <a class="brand" href="index.html" style="text-decoration:none;color:#fff"><span class="star">★</span> <div>Ôn tập 12<small>Hồ sơ cá nhân</small></div></a>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button id="themeToggleBtn" class="theme-toggle" onclick="toggleTheme()" title="Chuyển giao diện sáng/tối">🌙</button>
+      <div id="headerRight"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container" id="appRoot"></div>
+</main>
+
+<footer>Ôn tập 12 · Lịch sử & Tin học · <a href="index.html">← Về trang chọn môn</a></footer>
+
+<script src="js/data.js"></script>
+<script src="js/data_tinhoc.js"></script>
+<script src="js/auth.js"></script>
+<script>
+let activeTab = 'info';
+
+function renderApp() {
+  renderHeaderRight();
+  if (!requireAuthOrRedirect()) return;
+  const user = currentUser();
+  const root = document.getElementById('appRoot');
+
+  const lessonsAttempted = Object.keys(user.progress || {}).length;
+  let totalPct = 0;
+  Object.values(user.progress || {}).forEach(p => totalPct += p.bestScore / p.total);
+  const avgPct = lessonsAttempted ? Math.round((totalPct / lessonsAttempted) * 100) : 0;
+  const totalAttempts = (user.history || []).length;
+
+  root.innerHTML = `
+    <div style="margin-bottom:18px">
+      <a href="index.html" class="btn btn-ghost">← Quay về trang chủ</a>
+    </div>
+
+    <div class="profile-grid">
+      <div class="card profile-avatar-card">
+        <div class="profile-avatar-big">${avatarHtml(user, 110)}</div>
+        <h3 style="margin:4px 0 2px">${user.fullname || user.username}</h3>
+        <p style="color:var(--muted);font-size:.85rem;margin:0 0 4px">@${user.username}</p>
+        ${user.schoolClass ? `<p style="color:var(--muted);font-size:.82rem;margin:0 0 10px">🏫 ${user.schoolClass}</p>` : ''}
+        ${user.bio ? `<p style="font-size:.88rem;margin:10px 0 0;line-height:1.5">${user.bio}</p>` : `<p style="font-size:.85rem;color:var(--muted);margin:10px 0 0;font-style:italic">Chưa có tiểu sử. Hãy thêm vài dòng giới thiệu về bạn!</p>`}
+
+        <div style="margin:18px 0 6px;font-weight:700;font-size:.82rem;color:var(--muted)">Chọn ảnh đại diện nhanh</div>
+        <div class="avatar-picker">
+          ${AVATAR_PRESETS.map(a => `<button class="${user.avatar === a ? 'selected' : ''}" onclick="pickAvatar('${a}')">${a}</button>`).join('')}
+        </div>
+        <label class="btn btn-ghost btn-block" style="cursor:pointer">
+          📷 Tải ảnh lên từ máy
+          <input type="file" accept="image/*" style="display:none" onchange="onAvatarFile(event)" />
+        </label>
+
+        <div class="stats-row" style="margin-top:18px">
+          <div class="stat"><b>${lessonsAttempted}</b><span>Bài đã luyện</span></div>
+          <div class="stat"><b>${avgPct}%</b><span>Điểm TB</span></div>
+          <div class="stat"><b>${totalAttempts}</b><span>Lượt làm bài</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="profile-tabs">
+          <button class="${activeTab === 'info' ? 'active' : ''}" onclick="switchProfileTab('info')">👤 Thông tin cá nhân</button>
+          <button class="${activeTab === 'security' ? 'active' : ''}" onclick="switchProfileTab('security')">🔒 Đổi mật khẩu</button>
+          <button class="${activeTab === 'history' ? 'active' : ''}" onclick="switchProfileTab('history')">📊 Lịch sử luyện tập</button>
+        </div>
+
+        <div id="formMsg" class="form-msg"></div>
+
+        <div class="card" id="tabContent"></div>
+      </div>
+    </div>
+  `;
+  renderTabContent();
+}
+
+function renderTabContent() {
+  const user = currentUser();
+  const el = document.getElementById('tabContent');
+
+  if (activeTab === 'info') {
+    el.innerHTML = `
+      <form id="infoForm">
+        <div class="field">
+          <label>Họ và tên</label>
+          <input type="text" id="pFullname" value="${user.fullname || ''}" placeholder="VD: Nguyễn Văn A" />
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="pEmail" value="${user.email || ''}" />
+        </div>
+        <div class="field">
+          <label>Lớp / Trường</label>
+          <input type="text" id="pClass" value="${user.schoolClass || ''}" placeholder="VD: 12A1 - THPT Nguyễn Huệ" />
+        </div>
+        <div class="field">
+          <label>Mục tiêu học tập</label>
+          <input type="text" id="pGoal" value="${user.goal || ''}" placeholder="VD: Đạt 9+ môn Lịch sử trong kỳ thi THPT" />
+        </div>
+        <div class="field">
+          <label>Tiểu sử / Giới thiệu bản thân</label>
+          <textarea id="pBio" maxlength="300" placeholder="Vài dòng giới thiệu về bạn...">${user.bio || ''}</textarea>
+          <div class="hint">Tối đa 300 ký tự.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">💾 Lưu thay đổi</button>
+      </form>
+    `;
+    document.getElementById('infoForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const res = updateProfile({
+        fullname: document.getElementById('pFullname').value,
+        email: document.getElementById('pEmail').value,
+        schoolClass: document.getElementById('pClass').value,
+        goal: document.getElementById('pGoal').value,
+        bio: document.getElementById('pBio').value,
+      });
+      if (!res.ok) { showMsg(res.error, 'error'); return; }
+      showMsg('Đã lưu hồ sơ thành công!', 'ok');
+      renderApp();
+    });
+  }
+
+  if (activeTab === 'security') {
+    el.innerHTML = `
+      <form id="pwForm">
+        <div class="field">
+          <label>Mật khẩu hiện tại</label>
+          <input type="password" id="oldPw" autocomplete="current-password" required />
+        </div>
+        <div class="field">
+          <label>Mật khẩu mới</label>
+          <input type="password" id="newPw" autocomplete="new-password" required />
+        </div>
+        <div class="field">
+          <label>Nhập lại mật khẩu mới</label>
+          <input type="password" id="newPw2" autocomplete="new-password" required />
+        </div>
+        <button type="submit" class="btn btn-primary">🔒 Đổi mật khẩu</button>
+      </form>
+    `;
+    document.getElementById('pwForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const oldPassword = document.getElementById('oldPw').value;
+      const newPassword = document.getElementById('newPw').value;
+      const newPassword2 = document.getElementById('newPw2').value;
+      if (newPassword !== newPassword2) { showMsg('Mật khẩu mới nhập lại không khớp.', 'error'); return; }
+      const res = changePassword({ oldPassword, newPassword });
+      if (!res.ok) { showMsg(res.error, 'error'); return; }
+      showMsg('Đổi mật khẩu thành công!', 'ok');
+      document.getElementById('pwForm').reset();
+    });
+  }
+
+  if (activeTab === 'history') {
+    const history = user.history || [];
+    if (!history.length) {
+      el.innerHTML = `<div class="empty-state">Bạn chưa làm bài trắc nghiệm nào. <a href="index.html">Bắt đầu luyện tập ngay →</a></div>`;
+    } else {
+      el.innerHTML = history.map(h => {
+        const pct = Math.round((h.score / h.total) * 100);
+        const subjectKey = h.subject || 'lichsu'; // dữ liệu cũ trước khi có nhiều môn mặc định là Lịch sử
+        const icon = subjectKey === 'tinhoc' ? '💻' : '📜';
+        const DATA = subjectKey === 'tinhoc'
+          ? (typeof QUIZ_DATA_TINHOC !== 'undefined' ? QUIZ_DATA_TINHOC : [])
+          : (typeof QUIZ_DATA_LICHSU !== 'undefined' ? QUIZ_DATA_LICHSU : []);
+        const unit = subjectKey === 'tinhoc' ? 'Chuyên đề' : 'Bài';
+        let label;
+        if (h.lessonKey === 'all') label = 'Ôn tập tổng hợp';
+        else if (h.lessonKey === 'random40') label = 'Trộn ngẫu nhiên 40 câu';
+        else {
+          const l = DATA.find(x => String(x.num) === String(h.lessonKey));
+          label = l ? `${unit} ${l.num}: ${l.title}` : `${unit} ${h.lessonKey}`;
+        }
+        const date = new Date(h.at).toLocaleString('vi-VN');
+        return `<div class="history-item">
+          <span>${icon} ${label} <span style="color:var(--muted)">· ${date}</span></span>
+          <span class="pct" style="color:${pct>=70?'var(--green)':pct>=50?'var(--gold)':'var(--red-wrong)'}">${h.score}/${h.total} (${pct}%)</span>
+        </div>`;
+      }).join('');
+    }
+  }
+}
+
+function switchProfileTab(tab) {
+  activeTab = tab;
+  hideMsg();
+  renderApp();
+}
+
+function pickAvatar(emoji) {
+  updateProfile({ avatar: emoji });
+  renderApp();
+}
+
+function onAvatarFile(evt) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  fileToSmallDataUrl(file, 160).then(dataUrl => {
+    updateProfile({ avatar: dataUrl });
+    renderApp();
+  }).catch(() => {
+    showMsg('Không thể xử lý ảnh này. Hãy thử ảnh khác.', 'error');
+  });
+}
+
+function showMsg(text, type) {
+  const el = document.getElementById('formMsg');
+  if (!el) return;
+  el.textContent = text;
+  el.className = 'form-msg show ' + type;
+}
+function hideMsg() {
+  const el = document.getElementById('formMsg');
+  if (el) el.className = 'form-msg';
+}
+
+renderApp();
+</script>
+</body>
+</html>
